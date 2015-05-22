@@ -61,14 +61,41 @@ class TransactionController extends Controller
     public function actionCreate()
     {
         $model = new Transaction();
-        //$model->loadDefaultValues();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
+        }*/
+        /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            if(Yii::$app->getRequest()->isAjax)
+            {
+                return $this->renderAjax('create', [
+                    'model' => $model,
+                ]);
+            }
+            else
+            {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
+        }*/
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                echo 1;
+            }
+            else {
+                echo 0;
+            }
+        } else {
+            return $this->renderAjax('create', [
+                    'model' => $model,
+                ]); 
         }
     }
 

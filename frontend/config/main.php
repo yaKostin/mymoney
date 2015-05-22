@@ -12,20 +12,17 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'modules' => [ 
-        'gridview' => [ 'class' => '\kartik\grid\Module' ]
+        'gridview' => [
+            'class' => '\kartik\grid\Module'
+        ],
+        'main' => [
+            'class' => 'common\modules\main\Module',
+        ],
+        'transactions' => [
+            'class' => 'common\modules\transactions\Module',
+        ],
     ],
     'components' => [
-        'db' => [
-            'class'=>'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=diploma',
-            'username' => 'root',
-            'password' => '1234',
-            'charset' => 'utf8'           
-        ],
-        'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

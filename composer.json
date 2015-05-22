@@ -19,7 +19,8 @@
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "bower-asset/admin-lte": "*",
-        "kartik-v/yii2-grid": "dev-master"
+        "kartik-v/yii2-grid": "dev-master",
+        "prawee/yii2-widgets": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
