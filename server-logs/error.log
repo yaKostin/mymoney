@@ -1,0 +1,15 @@
+[Mon May 04 11:06:27 2015] [error] [client 127.0.0.1] script 'C:/Program Files (x86)/Apache/htdocs/mymoney/frontend/web/index.php' not found or unable to stat
+[Mon May 04 11:06:31 2015] [error] [client 127.0.0.1] script 'C:/Program Files (x86)/Apache/htdocs/mymoney/frontend/web/index.php' not found or unable to stat
+[Mon May 04 11:06:33 2015] [error] [client 127.0.0.1] script 'C:/Program Files (x86)/Apache/htdocs/mymoney/frontend/web/index.php' not found or unable to stat
+[Mon May 04 11:06:35 2015] [error] [client 127.0.0.1] script 'C:/Program Files (x86)/Apache/htdocs/mymoney/frontend/web/index.php' not found or unable to stat
+[Mon May 04 11:07:29 2015] [error] [client 127.0.0.1] File does not exist: C:/Program Files (x86)/Apache/htdocs/mymoney/favicon.ico
+[Mon May 04 11:07:38 2015] [error] [client 127.0.0.1] File does not exist: C:/Program Files (x86)/Apache/htdocs/mymoney/favicon.ico
+[Mon May 04 11:07:54 2015] [error] [client 127.0.0.1] File does not exist: C:/Program Files (x86)/Apache/htdocs/mymoney/browserconfig.xml
+[Mon May 04 11:11:31 2015] [error] [client 127.0.0.1] script 'C:/Program Files (x86)/Apache/htdocs/mymoney/frontend/web/index.php' not found or unable to stat
+[Mon May 04 10:50:32 2015] [error] [client 127.0.0.1] client denied by server configuration: C:/Program Files (x86)/Apache/htdocs/mymoney/.htaccess
+[Mon May 04 10:50:33 2015] [error] [client 127.0.0.1] File does not exist: C:/Program Files (x86)/Apache/htdocs/mymoney/favicon.ico, referer: http://mymoney/
+[Mon May 04 10:51:14 2015] [error] [client 127.0.0.1] client denied by server configuration: C:/Program Files (x86)/Apache/htdocs/mymoney/.htaccess
+[Mon May 04 10:51:21 2015] [error] [client 127.0.0.1] script 'C:/Program Files (x86)/Apache/htdocs/mymoney/index.php' not found or unable to stat
+[Mon May 04 10:53:51 2015] [error] [client 127.0.0.1] client denied by server configuration: C:/Program Files (x86)/Apache/htdocs/mymoney/.htaccess, referer: http://mymoney/frontend/
+[Mon May 04 11:51:34 2015] [error] [client 127.0.0.1] script 'C:/Program Files (x86)/Apache/htdocs/mymoney/index.php' not found or unable to stat, referer: http://mymoney/frontend/web/index.php?r=gii
+[Mon May 04 20:10:11 2015] [error] [client 127.0.0.1] client denied by server configuration: C:/Program Files (x86)/Apache/htdocs/mymoney/.htaccess
