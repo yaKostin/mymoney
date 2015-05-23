@@ -17,8 +17,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php
-        Modal::begin(['id'=>'main-modal']);
+        Modal::begin([
+        		'id' => 'main-modal',
+        		'size' => 'modal-lg',
+        	]);
+
         echo '<div id="main-content-modal"></div>';
+        
         Modal::end();
     ?>
 

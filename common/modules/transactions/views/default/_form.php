@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\modules\transactions\TransactionsAsset;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Transaction */
@@ -12,15 +13,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(['id' => $model->formName()]); ?>
 
-    <?= $form->field($model, 'card_id')->textInput() ?>
-
-    <?= $form->field($model, 'transactiontype_id')->textInput() ?>
-
-    <?= $form->field($model, 'trdate')->textInput() ?>
-
-    <?= $form->field($model, 'desciption')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'amount')->textInput() ?>
+    <div class="row">
+        <div class="col-md-3"> <?= $form->field($model, 'desciption')->textInput(['maxlength' => true]) ?> </div>
+        <div class="col-md-2"> <?= $form->field($model, 'amount')->textInput() ?> </div>
+        <div class="col-md-2"> <?= $form->field($model, 'trdate')->textInput() ?> </div>
+        <div class="col-md-2"> <?= $form->field($model, 'transactiontype_id')->textInput()->label('Тип') ?> </div>
+        <div class="col-md-3"> <?= $form->field($model, 'card_id')->textInput() ?> </div>
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -31,30 +30,6 @@ use yii\widgets\ActiveForm;
 </div>
 
 <?php 
-$script = <<< JS
-
-$('form#{$model->formName()}').on('beforeSubmit', function(e) {
-    var \$form = $(this);
-    $.post(
-        \$form.attr('action'),
-        \$form.serialize()
-        )
-    .done(function(result) {
-            if(result == 1) {
-                $(document).find('#main-modal').modal('hide');
-                $(\$form).trigger("reset");
-                $.pjax.reload({container:'#main-grid'});
-            } else {
-                $(\$form).trigger("reset");
-                $("#message").html(result.message);
-            }
-        }).fail(function(){
-            console.log("server error");
-        });
-return false;
-});
-
-JS;
-$this->registerJs($script);
+TransactionsAsset::register($this);
 ?>
     
