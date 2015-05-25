@@ -12,6 +12,8 @@ use yii\helpers\Html;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'transactiontypeArray' => $transactiontypeArray,
+        'cardArray' => $cardArray,
     ]) ?>
 
 </div>

@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'amount',
             'currency_id',
             // 'bank_id',
+            // 'name',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

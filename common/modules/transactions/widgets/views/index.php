@@ -9,12 +9,9 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Transactions';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Транзакции';
 ?>
 <div class="transaction-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?php
         Modal::begin([
@@ -31,14 +28,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php echo
 	GridView::widget([
-	    'dataProvider' => $model->dataProvider,
+	    'dataProvider' => $transactionsDataProvider,
 	    //'filterModel' => $model->$searchModel,
 	    //'columns' => $model->gridColumns,
 	    'export' => false,
+        'rowOptions' => function($model) {  
+                if ($model->transactiontype->name == 'доход' || 
+                    $model->transactiontype->name == 'возврат') {
+                    return ['class' => 'success'];
+                } elseif ($model->transactiontype->name == 'расход') {
+                    return ['class' => 'danger'];
+                }
+            },
 	    'containerOptions' => ['style'=>'overflow: auto'],
         'toolbar' =>  [
             ['content'=>
-                Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['customer/index'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>'Reset Grid'])
+                Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['transactions'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>'Reset Grid'])
             ],
             '{toggleData}',
             '{export}',
@@ -52,6 +57,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'condensed' => false,
         'responsive' => true,	
         'hover' => true,
+        'columns' => [
+            //'id:text:Карта',
+            'description:text:Описание',
+            'amount:decimal:Сумма',
+            'trdate:datetime:Дата',
+            'transactiontype_id:text:Тип',
+            'card.name:text:Карта',
+            'transactiontype.name:text:Тип'
+            //'transactionTags'
+            //''
+        ],
         //'resizableColumns' => true,
         'panel' => [
             'type' => GridView::TYPE_PRIMARY,

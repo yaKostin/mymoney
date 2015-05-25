@@ -3,8 +3,6 @@ namespace frontend\controllers;
 
 use Yii;
 
-use common\components\transactions\models\TransactionsModel;
-
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use frontend\models\DashboardModel;
@@ -17,6 +15,7 @@ use yii\data\ActiveDataProvider;
 
 use common\models\Bank;
 use common\models\Transaction;
+use common\models\Budget;
 
 /**
  * Site controller
@@ -77,33 +76,24 @@ class SiteController extends Controller
 
     public function actionDashboard()
     {
-        $model = new DashboardModel();
-        $banks = Bank::find()->orderBy('name')->all();
-        $model->dataProvider = new ActiveDataProvider([
-            'query' => Bank::find()->orderBy('name'),
+        $user_id = Yii::$app->user->identity->id;
+        $transactionsDataProvider = new ActiveDataProvider([
+            'query' => Transaction::find()->where(['card_id' => $user_id])->orderBy(['id' => SORT_DESC]),
             'pagination' => [
-                'pageSize' => 20,
+                'pageSize' => 10,
             ],
+            'sort' => [
+                'attributes' => [
+                    'amount',
+                    'trdate'
+                    ]
+                ]
         ]);
 
-        $model->transactions = new ActiveDataProvider([
-            'query' => Transaction::find()->where(['card_id' => 1]),
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-        ]);
-
-        $transactionsModel = new TransactionsModel();
-        $transactionsModel->dataProvider = $model->transactions;
-        $transactionsModel->title = "Транзакции";
-
-        $model->gridColumns = [
-            'name:text:Название'
-        ];
+        $budget = Budget::find()->where(['user_id' => $user_id])->one();
         return $this->render('dashboard', [
-                'model' => $model,
-                'banks' => $banks,
-                'transactionsModel' => $transactionsModel,
+                'transactionsDataProvider' => $transactionsDataProvider,
+                'budget' => $budget
             ]);
     }
 

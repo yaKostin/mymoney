@@ -3,7 +3,7 @@
 namespace common\modules\transactions\models;
 
 use Yii;
-
+use common\modules\transactions\models\Transactiontype;
 /**
  * This is the model class for table "transaction".
  *
@@ -11,7 +11,7 @@ use Yii;
  * @property integer $card_id
  * @property integer $transactiontype_id
  * @property string $trdate
- * @property string $desciption
+ * @property string $description
  * @property integer $amount
  *
  * @property Card $card
@@ -37,7 +37,7 @@ class Transaction extends \yii\db\ActiveRecord
             [['card_id', 'transactiontype_id', 'amount'], 'required'],
             [['card_id', 'transactiontype_id', 'amount'], 'integer'],
             [['trdate'], 'safe'],
-            [['desciption'], 'string', 'max' => 90]
+            [['description'], 'string', 'max' => 90]
         ];
     }
 
@@ -48,11 +48,11 @@ class Transaction extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'card_id' => 'Card ID',
-            'transactiontype_id' => 'Transactiontype ID',
-            'trdate' => 'Trdate',
-            'desciption' => 'Desciption',
-            'amount' => 'Amount',
+            'card_id' => 'Карта',
+            'transactiontype_id' => 'Тип',
+            'trdate' => 'Дата',
+            'description' => 'Описание',
+            'amount' => 'Сумма',
         ];
     }
 
@@ -70,6 +70,14 @@ class Transaction extends \yii\db\ActiveRecord
     public function getTransactiontype()
     {
         return $this->hasOne(Transactiontype::className(), ['id' => 'transactiontype_id']);
+    }
+
+    /**
+     * @return array Transactiontype array.
+     */
+    public static function getTransactiontypeArray()
+    {
+       return Transactiontype::find()->all();
     }
 
     /**

@@ -13,6 +13,7 @@ use Yii;
  * @property integer $amount
  * @property integer $currency_id
  * @property integer $bank_id
+ * @property string $name
  *
  * @property Bank $bank
  * @property Cardtype $cardtype
@@ -37,7 +38,8 @@ class Card extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'cardtype_id', 'amount', 'bank_id'], 'required'],
-            [['user_id', 'cardtype_id', 'amount', 'currency_id', 'bank_id'], 'integer']
+            [['user_id', 'cardtype_id', 'amount', 'currency_id', 'bank_id'], 'integer'],
+            [['name'], 'string', 'max' => 45]
         ];
     }
 
@@ -53,6 +55,7 @@ class Card extends \yii\db\ActiveRecord
             'amount' => 'Amount',
             'currency_id' => 'Currency ID',
             'bank_id' => 'Bank ID',
+            'name' => 'Name',
         ];
     }
 
