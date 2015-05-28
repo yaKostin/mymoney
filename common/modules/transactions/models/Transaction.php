@@ -12,7 +12,7 @@ use common\modules\transactions\models\Transactiontype;
  * @property integer $transactiontype_id
  * @property string $trdate
  * @property string $description
- * @property integer $amount
+ * @property string $amount
  *
  * @property Card $card
  * @property Transactiontype $transactiontype
@@ -35,8 +35,9 @@ class Transaction extends \yii\db\ActiveRecord
     {
         return [
             [['card_id', 'transactiontype_id', 'amount'], 'required'],
-            [['card_id', 'transactiontype_id', 'amount'], 'integer'],
+            [['card_id', 'transactiontype_id'], 'integer'],
             [['trdate'], 'safe'],
+            [['amount'], 'number'],
             [['description'], 'string', 'max' => 90]
         ];
     }

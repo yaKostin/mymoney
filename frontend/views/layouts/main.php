@@ -255,6 +255,7 @@ AppAsset::register($this);
             <!-- /.navbar-top-links -->
 
             <div class="navbar-default sidebar" role="navigation">
+
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
@@ -277,8 +278,9 @@ AppAsset::register($this);
                         <li>
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i> Бюджет<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
                         </li>
-                        <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Счета<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
+                        <li><div id="cards" value="aaa">
+                            <a href="#"><i class="fa fa-edit fa-fw"></i> Счета<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
+                            </div>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> Напоминания<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
@@ -304,7 +306,9 @@ AppAsset::register($this);
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-
+        <!-- content of sidebar -->
+        <div class="sidebar-last-row"> </div>
+        <!-- /.content of sidebar -->
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">

@@ -40,10 +40,10 @@ use dosamigos\chartjs\ChartJs;
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-plus fa-5x"></i>
+                            <i class="fa fa-minus fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-center">		
-                            <div class="huge"><?= $budget->expense ?></div>
+                            <div class="huge">- <?= $budget->expense ?></div>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@ use dosamigos\chartjs\ChartJs;
                             <i class="fa fa-plus fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-center">		
-                            <div class="huge"><?= $budget->income ?></div>
+                            <div class="huge">+ <?= $budget->income ?></div>
                         </div>
                     </div>
                 </div>

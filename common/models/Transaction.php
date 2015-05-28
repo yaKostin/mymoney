@@ -11,8 +11,8 @@ use Yii;
  * @property integer $card_id
  * @property integer $transactiontype_id
  * @property string $trdate
- * @property string $desciption
- * @property integer $amount
+ * @property string $description
+ * @property string $amount
  *
  * @property Card $card
  * @property Transactiontype $transactiontype
@@ -35,9 +35,10 @@ class Transaction extends \yii\db\ActiveRecord
     {
         return [
             [['card_id', 'transactiontype_id', 'amount'], 'required'],
-            [['card_id', 'transactiontype_id', 'amount'], 'integer'],
+            [['card_id', 'transactiontype_id'], 'integer'],
             [['trdate'], 'safe'],
-            [['desciption'], 'string', 'max' => 90]
+            [['amount'], 'number'],
+            [['description'], 'string', 'max' => 90]
         ];
     }
 
@@ -51,7 +52,7 @@ class Transaction extends \yii\db\ActiveRecord
             'card_id' => 'Card ID',
             'transactiontype_id' => 'Transactiontype ID',
             'trdate' => 'Trdate',
-            'desciption' => 'Desciption',
+            'description' => 'Description',
             'amount' => 'Amount',
         ];
     }

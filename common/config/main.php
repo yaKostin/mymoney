@@ -8,6 +8,9 @@ return [
         'user' => [
             'class' => 'common\modules\user\Module',
         ],
+        'accounts' => [
+            'class' => 'common\modules\accounts\Module',
+        ],
     ],
     'components' => [
         'cache' => [
