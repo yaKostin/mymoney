@@ -1,6 +1,6 @@
 <?php
 
-namespace common\modules\accounts\models;
+namespace common\modules\transactions\models;
 
 use Yii;
 
@@ -51,11 +51,11 @@ class Card extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
-            'cardtype_id' => 'Тип',
-            'amount' => 'Баланс',
-            'currency_id' => 'Валюта',
-            'bank_id' => 'Банк',
-            'name' => 'Название',
+            'cardtype_id' => 'Cardtype ID',
+            'amount' => 'Amount',
+            'currency_id' => 'Currency ID',
+            'bank_id' => 'Bank ID',
+            'name' => 'Name',
         ];
     }
 

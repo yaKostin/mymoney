@@ -17,7 +17,7 @@ class TransactionsWidget extends Widget
     public function run()
     {
         return $this->render('index', [
-                'transactionsDataProvider' => $this->transactionsDataProvider
+                'transactionsDataProvider' => $this->transactionsDataProvider,
             ]);
     }
 }

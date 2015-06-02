@@ -6,6 +6,7 @@ use kartik\grid\GridView;
 use prawee\widgets\ButtonAjax;
 use yii\bootstrap\Modal;
 use yii\widgets\Pjax;
+use yii\grid\ActionColumn;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -32,15 +33,7 @@ $this->title = 'Транзакции';
 	    //'filterModel' => $model->$searchModel,
 	    //'columns' => $model->gridColumns,
 	    'export' => false,
-        'rowOptions' => function($model) {  
-                if ($model->transactiontype->name == 'доход' || 
-                    $model->transactiontype->name == 'возврат') {
-                    return ['class' => 'success'];
-                } elseif ($model->transactiontype->name == 'расход') {
-                    return ['class' => 'danger'];
-                }
-            },
-	    'containerOptions' => ['style'=>'overflow: auto'],
+       
         'toolbar' =>  [
             ['content'=>
                 Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['transactions'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>'Reset Grid'])
@@ -51,21 +44,49 @@ $this->title = 'Транзакции';
         'pjax' => true,
         'pjaxSettings'=>[
             'neverTimeout'=>true,
-        ],
-        'bordered' => true,
-        'striped' => false,
-        'condensed' => false,
-        'responsive' => true,	
+        ],    
         'hover' => true,
         'columns' => [
+            ['class' => '\kartik\grid\CheckboxColumn'],
             //'id:text:Карта',
-            'description:text:Описание',
-            'amount:decimal:Сумма',
-            'trdate:datetime:Дата',
-            'transactiontype_id:text:Тип',
-            'card.name:text:Карта',
-            'transactiontype.name:text:Тип'
-            //'transactionTags'
+            'description:raw:Описание',
+            'columns' => [
+                'attribute' => 'amount',
+                'label' => 'Сумма',
+                'format' => 'raw',
+                'contentOptions' =>function ($model, $key, $index, $column){
+                    if ($model->transactiontype_id == 1) {
+                        return ['class' => 'danger'];
+                    }
+                    else {
+                        return ['class' => 'success'];
+                    }
+                },
+                'value' => function ($model, $index, $widget) {
+                        $sign = $model->transactiontype_id == 1 ? '-' : '+';
+                        return $sign . ' ' . $model->amount;
+                    }
+                ],
+            'trdate:raw:Дата',
+            'card.name:raw:Карта',
+            //'transactiontype.name:raw:Тип',
+            [
+                'attribute' => 'transactionTags',
+                'label' => 'Теги',
+                'value' => function($model, $index, $widget) {
+                    if (count($model->transactionTags)) {
+                        $tagsStr = '';
+                        foreach ($model->transactionTags as $tag) {
+                            $tagsStr .= $tag->getIdTag()->one()->name . '; ';
+                        }
+                        return $tagsStr;                    
+                    }
+                },
+            ],
+            [
+                'class' => ActionColumn::className(),
+                'controller' => 'transactions/default'
+            ],
             //''
         ],
         //'resizableColumns' => true,

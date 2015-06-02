@@ -5,7 +5,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use frontend\widgets\Alert;
-
+use yii\bootstrap\Modal;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -276,10 +276,11 @@ AppAsset::register($this);
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Отчеты<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Бюджет<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
+                            <a href="#"><i class="fa fa-table fa-fw"></i> Бюджет<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
                         </li>
-                        <li><div id="cards" value="aaa">
-                            <a href="#"><i class="fa fa-edit fa-fw"></i> Счета<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
+                        <li>
+                            <div id="cards" class='sidebar-element-linked container-fluid'> 
+                            <i class="fa fa-edit fa-fw"></i> Счета<span class="pull-right"><i class="fa fa-angle-right"></i></span>
                             </div>
                         </li>
                         <li>
@@ -306,10 +307,9 @@ AppAsset::register($this);
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-        <!-- content of sidebar -->
-        <div class="sidebar-last-row"> </div>
-        <!-- /.content of sidebar -->
+        
         <div id="page-wrapper">
+        
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Dashboard</h1>
@@ -317,9 +317,9 @@ AppAsset::register($this);
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-         
-            
+         <div id="sidebar-content-panel"> </div>
             <?= $content ?>
+            
         </div>
         <!-- /#page-wrapper -->
     </div>

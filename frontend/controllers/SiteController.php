@@ -14,7 +14,8 @@ use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
 
 use common\models\Bank;
-use common\models\Transaction;
+//use common\models\Transaction;
+use common\modules\transactions\models\Transaction;
 use common\models\Budget;
 
 /**

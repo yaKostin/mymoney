@@ -1,4 +1,4 @@
 $( "#cards" ).click(function() {
-    //$('.sidebar-last-row').toggle(300);
-    $('.sidebar-last-row').load('http://localhost/mymoney/frontend/web/index.php?r=accounts');
+    $('#sidebar-content-panel').toggle(300);
+    $('#sidebar-content-panel').load('http://localhost/mymoney/frontend/web/index.php?r=accounts');
 });

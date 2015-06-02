@@ -12,6 +12,9 @@ use yii\helpers\Html;
 
     <?= $this->render('_form', [
         'card' => $card,
+        'banks' => $banks,
+        'currencies' => $currencies,
+        'cardtypes' => $cardtypes
     ]) ?>
 
 </div>

@@ -14,6 +14,7 @@ use yii\helpers\Html;
         'model' => $model,
         'transactiontypeArray' => $transactiontypeArray,
         'cardArray' => $cardArray,
+        'tagArray' => $tagArray,
     ]) ?>
 
 </div>

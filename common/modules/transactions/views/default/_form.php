@@ -1,10 +1,10 @@
 <?php
-
+use Yii\app;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use common\modules\transactions\TransactionsAsset;
 use yii\helpers\ArrayHelper;
 use dosamigos\datepicker\DatePicker;
+use kartik\select2\Select2;
 //use common\models\Transactiontype;  
 /* @var $this yii\web\View */
 /* @var $model common\models\Transaction */
@@ -43,17 +43,71 @@ use dosamigos\datepicker\DatePicker;
                 )
             ?>
         </div>
+    </div>      
+    <div class="row">
+        <div class="col-md-12">
+            <?= $form->field($model, 'tags')->widget(Select2::className(), [
+                    'id' => 'select2-tags',
+                    'theme' => Select2::THEME_BOOTSTRAP,
+                    'options' => [
+                        'style' => 'width:100%',
+                    ],        
+                    'data' => ArrayHelper::map($tagArray, 'id', 'name'),
+                    'options' => ['placeholder' => 'Выберите теги'],
+                    'pluginOptions' => [
+                        'tags' => true,
+                        'tokenSeparators' => [',', ' '],
+                        'maximumInputLength' => 3,
+                        'maximumSelectionSize' => 3,
+                        'maximumSelectionLength' => 5,
+                    ],
+                ]);
+            ?>
+        </div>
     </div>
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <div class="row">
+        <div class="col-md-2">
+            <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        </div>
     </div>
-
     <?php ActiveForm::end(); ?>
 
 </div>
 
 <?php 
-TransactionsAsset::register($this);
-?>
-    
+$script = <<< JS
+   
+$('form#Transaction').on('beforeSubmit', function(e) {
+    console.log('transactions.js loaded');
+    var \$form = $(this);
+    $.post(
+        \$form.attr('action'),
+        \$form.serialize()
+        )
+    .done(function(result) {
+            if(result == 1) {
+                $(document).find('#main-modal').modal('hide');
+                $(\$form).trigger("reset");
+                $.pjax.reload({container:'#main-grid'});
+            } else {
+                $(\$form).trigger("reset");
+                $("#message").html(result.message);
+            }
+        }).fail(function(){
+            console.log("server error");
+        });
+return false;
+});
+
+$('#main-modal').on('shown.bs.modal', function (e) {
+     $("#select2-tags").select2();
+     if ( $('.select2-container').hasClass('select2-container--default') ) {
+        var failedSpan = $('.select2-container')[0];
+        $(failedSpan).removeClass('select2-container--default').addClass('select2-container--krajee');
+     }
+});
+
+JS;
+
+$this->registerJs($script); 
+?> 

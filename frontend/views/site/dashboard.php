@@ -5,6 +5,10 @@ use yii\bootstrap\Carousel;
 use common\modules\transactions\widgets\TransactionsWidget;
 use common\modules\transactions;
 use dosamigos\chartjs\ChartJs;
+
+use kartik\select2\Select2;
+use yii\web\JsExpression;
+use yii\bootstrap\Modal;
 ?>
 
 	<div class="row">
@@ -106,3 +110,5 @@ use dosamigos\chartjs\ChartJs;
 </div>
 </div>
 	<?= TransactionsWidget::widget(['transactionsDataProvider' => $transactionsDataProvider]) ?>
+
+   

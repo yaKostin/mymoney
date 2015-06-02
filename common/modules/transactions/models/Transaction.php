@@ -3,7 +3,10 @@
 namespace common\modules\transactions\models;
 
 use Yii;
+use yii\db\QueryBuilder;
+
 use common\modules\transactions\models\Transactiontype;
+use common\modules\transactions\models\TransactionTags;
 /**
  * This is the model class for table "transaction".
  *
@@ -20,6 +23,7 @@ use common\modules\transactions\models\Transactiontype;
  */
 class Transaction extends \yii\db\ActiveRecord
 {
+    public $tags = [];
     /**
      * @inheritdoc
      */
@@ -36,7 +40,7 @@ class Transaction extends \yii\db\ActiveRecord
         return [
             [['card_id', 'transactiontype_id', 'amount'], 'required'],
             [['card_id', 'transactiontype_id'], 'integer'],
-            [['trdate'], 'safe'],
+            [['trdate', 'tags'], 'safe'],
             [['amount'], 'number'],
             [['description'], 'string', 'max' => 90]
         ];
@@ -54,7 +58,27 @@ class Transaction extends \yii\db\ActiveRecord
             'trdate' => 'Дата',
             'description' => 'Описание',
             'amount' => 'Сумма',
+            'transactionTags' => 'Теги',
         ];
+    }
+
+    /**
+    * @inheritdoc
+    */
+    public function afterSave($insert, $changedAttributes)
+    {
+        if ( !empty($this->tags) ) {
+            TransactionTags::deleteAll(['id_transaction' => $this->id]);
+            $values = [];            
+            for($i = 0; $i < count($this->tags); $i++) {
+                $values[$i] = [$this->id, $this->tags[$i]];
+            }
+            
+            self::getDb()->createCommand()
+                ->batchInsert(TransactionTags::tableName(), ['id_transaction', 'id_tag'], $values)->execute();
+         
+            parent::afterSave($insert, $changedAttributes);
+        }
     }
 
     /**

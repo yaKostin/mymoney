@@ -1,3 +1,13 @@
+#sidebar-content-panel {
+        
+        
+        left: 200px;
+        top: 0px;
+        width: 300px;
+        height: 800px;
+        background-color: #e7e7e7;     
+        display: none;   
+    }
 /*!
  * Start Bootstrap - SB Admin 2 Bootstrap Admin Theme (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
@@ -5,7 +15,7 @@
  */
 
 body {
-    background-color: #444e5f;
+    background-color: #f8f8f8;
 }
 
 #wrapper {
@@ -85,8 +95,20 @@ body {
     left: auto;
 }
 
+.sidebar-element-linked {
+    line-height: 41px;
+    min-height: 41px;
+    vertical-align: middle;
+    color: #337ab7;
+    background-color: #eee; 
+}
+
+.sidebar-element-linked:hover {
+    color: black;
+    cursor: pointer;
+}
+
 .sidebar .sidebar-nav.navbar-collapse {
-    background-color: #444e5f;
     padding-right: 0;
     padding-left: 0;
 }
@@ -96,15 +118,12 @@ body {
 }
 
 .sidebar ul li {
-    border-bottom: 1px solid #2f3641;
-}
-
-.sidebar ul li a:hover {
-    background-color: #717f99;
+    min-height: 41px;
+    border-bottom: 1px solid #e7e7e7;
 }
 
 .sidebar ul li a.active {
-    background-color: #cdd2db;
+    background-color: #eee;
 }
 
 .sidebar .arrow {
@@ -134,7 +153,6 @@ body {
 
 @media(min-width:768px) {
     .sidebar {
-        background-color: inherit;
         z-index: 1;
         position: absolute;
         width: 200px;
@@ -145,16 +163,6 @@ body {
     .navbar-top-links .dropdown-tasks,
     .navbar-top-links .dropdown-alerts {
         margin-left: auto;
-    }
-
-    .sidebar-last-row {
-        z-index: 1;
-        position: absolute;
-        left: 200px;
-        width: 300px;
-        height: 100%;
-        background-color: #5a667d;
-        
     }
 }
 

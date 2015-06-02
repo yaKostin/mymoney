@@ -20,7 +20,9 @@
         "yiisoft/yii2-swiftmailer": "*",
         "bower-asset/admin-lte": "*",
         "kartik-v/yii2-grid": "dev-master",
+        "kartik-v/yii2-widget-select2": "*",
         "prawee/yii2-widgets": "dev-master",
+        "prawee/yii2-theme-sb-admin": "dev-master",
         "2amigos/yii2-date-picker-widget" : "~1.0",
         "2amigos/yii2-chartjs-widget" : "~2.0"
     },
