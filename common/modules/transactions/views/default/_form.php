@@ -21,11 +21,13 @@ use kartik\select2\Select2;
         <div class="col-md-2"> <?= $form->field($model, 'amount')->textInput() ?> </div>
         <div class="col-md-2"> 
             <?= $form->field($model, 'trdate')->widget(DatePicker::classname(), [
+                    //'id' => 'datepicker-trdate',
                     'inline' => false,
                     'language' => 'ru',
                     'clientOptions' => [
                         'autoclose' => true,
                         'format' => 'yyyy-m-d',
+                        'todayHighlight' => true,
                         //'format' => 'd-M-yyyy',
                     ],    
                 ])   
@@ -107,6 +109,10 @@ $('#main-modal').on('shown.bs.modal', function (e) {
      }
 });
 
+$(function () {
+    var dateNow = new Date();
+    $('#transaction-trdate').parent().datepicker('update', new Date());
+});
 JS;
 
 $this->registerJs($script); 
