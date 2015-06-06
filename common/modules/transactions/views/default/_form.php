@@ -103,6 +103,7 @@ return false;
 
 $('#main-modal').on('shown.bs.modal', function (e) {
      $("#select2-tags").select2();
+     console.log('fff');
      if ( $('.select2-container').hasClass('select2-container--default') ) {
         var failedSpan = $('.select2-container')[0];
         $(failedSpan).removeClass('select2-container--default').addClass('select2-container--krajee');

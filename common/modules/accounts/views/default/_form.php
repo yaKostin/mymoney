@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
@@ -42,7 +41,6 @@ use common\modules\accounts\AccountsAsset;
     </div>
     <div class="form-group">
 
-
         <?= Html::submitButton($card->isNewRecord ? 'Добавить' : 'Обновить', ['class' => $card->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
@@ -51,8 +49,6 @@ use common\modules\accounts\AccountsAsset;
 </div>
 
 <?php 
-//AccountsAsset::register($this);
-
 $script = <<< JS
 
 $('form#Card').on('beforeSubmit', function(e) {
@@ -75,6 +71,10 @@ $('form#Card').on('beforeSubmit', function(e) {
             console.log("server error");
         });
 return false;
+});
+
+$('#add-account-modal').on('shown.bs.modal', function (e) {
+    $('#add-account-modal').appendTo("body");    
 });
 
 JS;

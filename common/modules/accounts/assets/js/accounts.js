@@ -1,5 +1,4 @@
 $('form#Card').on('beforeSubmit', function(e) {
-    console.log('accounts.js loaded');
     var $form = $(this);
     $.post(
         $form.attr('action'),

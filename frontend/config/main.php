@@ -21,6 +21,9 @@ return [
         'transactions' => [
             'class' => 'common\modules\transactions\Module',
         ],
+        'tags' => [
+            'class' => 'common\modules\tags\Module',
+        ],
     ],
     'components' => [
         'log' => [

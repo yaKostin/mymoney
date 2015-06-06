@@ -1,13 +1,14 @@
 #sidebar-content-panel {
-        
-        
+        z-index: 5;
+        position: fixed;
         left: 200px;
         top: 0px;
         width: 300px;
-        height: 800px;
+        height: 100%;
         background-color: #e7e7e7;     
         display: none;   
-    }
+}
+
 /*!
  * Start Bootstrap - SB Admin 2 Bootstrap Admin Theme (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.

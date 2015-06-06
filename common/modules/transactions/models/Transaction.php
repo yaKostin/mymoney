@@ -40,7 +40,6 @@ class Transaction extends \yii\db\ActiveRecord
         return [
             [['card_id', 'transactiontype_id', 'amount'], 'required'],
             [['card_id', 'transactiontype_id'], 'integer'],
-            //['transactiontype_id', 'default', 'value' => 3],
             [['trdate', 'tags'], 'safe'],
             [['amount'], 'number'],
             [['description'], 'string', 'max' => 90]

@@ -18,7 +18,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    
     <?php $this->head() ?>
 </head>
 <body>
@@ -280,14 +280,16 @@ AppAsset::register($this);
                         </li>
                         <li>
                             <div id="cards" class='sidebar-element-linked container-fluid'> 
-                            <i class="fa fa-edit fa-fw"></i> Счета<span class="pull-right"><i class="fa fa-angle-right"></i></span>
+                                <i class="fa fa-edit fa-fw"></i> Счета<span class="pull-right"><i class="fa fa-angle-right"></i></span>
                             </div>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> Напоминания<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Теги<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
+                            <div id="tags" class='sidebar-element-linked container-fluid'> 
+                                <i class="fa fa-sitemap fa-fw"></i> Теги<span class="pull-right"><i class="fa fa-angle-right"></i></span>
+                            </div>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
@@ -309,17 +311,8 @@ AppAsset::register($this);
         </nav>
         
         <div id="page-wrapper">
-        
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-         <div id="sidebar-content-panel"> </div>
+            <div id="sidebar-content-panel"> </div>   
             <?= $content ?>
-            
         </div>
         <!-- /#page-wrapper -->
     </div>

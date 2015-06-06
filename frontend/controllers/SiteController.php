@@ -16,6 +16,8 @@ use yii\data\ActiveDataProvider;
 use common\models\Bank;
 //use common\models\Transaction;
 use common\modules\transactions\models\Transaction;
+use common\modules\transactions\models\Card;
+use common\modules\tags\models\Tag;
 use common\models\Budget;
 
 /**
@@ -73,6 +75,55 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    public function actionTag() 
+    {
+        $user_id = Yii::$app->user->identity->id;
+        $tag_id = $_GET['id'];
+        $tag = Tag::find()->where(['id' => $tag_id])->one();
+        $transactionsDataProvider = new ActiveDataProvider([
+            'query' => $tag->getTransactions(),
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+            'sort' => [
+                'attributes' => [
+                    'amount',
+                    'trdate'
+                    ]
+                ]
+        ]);
+
+        return $this->render('tag', [
+                'transactionsDataProvider' => $transactionsDataProvider,
+                'tag' => $tag,
+            ]);
+    }
+
+
+    public function actionAccount() 
+    {
+        $user_id = Yii::$app->user->identity->id;
+        $card_id = $_GET['account'];
+        $card = Card::find()->where(['id' => $card_id])->one();
+        $transactionsDataProvider = new ActiveDataProvider([
+            'query' => Transaction::find()->where(['card_id' => $card_id])->orderBy(['id' => SORT_DESC]),
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+            'sort' => [
+                'attributes' => [
+                    'amount',
+                    'trdate'
+                    ]
+                ]
+        ]);
+
+        return $this->render('account', [
+                'transactionsDataProvider' => $transactionsDataProvider,
+                'card' => $card,
+            ]);
     }
 
     public function actionDashboard()
