@@ -1,0 +1,25 @@
+Add AssetBundle for transactions module
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#	new file:   common/modules/transactions/TransactionsAsset.php
+#	new file:   common/modules/transactions/assets/js/transactions.js
+#	modified:   common/modules/transactions/views/default/_form.php
+#	modified:   common/modules/transactions/views/default/create.php
+#	modified:   common/modules/transactions/widgets/views/index.php
+#	deleted:    frontend/web/assets/37909431/gii.js
+#	deleted:    frontend/web/assets/37909431/logo.png
+#	deleted:    frontend/web/assets/37909431/main.css
+#	deleted:    frontend/web/assets/40956ea8/bloodhound.js
+#	deleted:    frontend/web/assets/40956ea8/bloodhound.min.js
+#	deleted:    frontend/web/assets/40956ea8/typeahead.bundle.js
+#	deleted:    frontend/web/assets/40956ea8/typeahead.bundle.min.js
+#	deleted:    frontend/web/assets/40956ea8/typeahead.jquery.js
+#	deleted:    frontend/web/assets/40956ea8/typeahead.jquery.min.js
+#	deleted:    frontend/web/assets/8b528465/bg.png
+#	deleted:    frontend/web/assets/8b528465/main.css
+#	deleted:    frontend/web/assets/8b528465/toolbar.css
+#	deleted:    frontend/web/assets/8b528465/toolbar.js
+#	new file:   frontend/web/assets/dc1d7449/js/transactions.js
+#

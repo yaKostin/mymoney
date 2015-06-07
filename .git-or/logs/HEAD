@@ -1,0 +1,5 @@
+0000000000000000000000000000000000000000 06b6426dcaca0324b1c6ffe422cb73d99aae8e3c unknown <Yaroslav@Yaroslav-PC.(none)> 1431932202 +0300
+06b6426dcaca0324b1c6ffe422cb73d99aae8e3c 2249fe912575ccd78bed170d645c6c959883f463 yaKostin <yaKostin@github.com> 1431933332 +0300	commit: Add ActiveRecord for all db tables, Bootstrap theme
+2249fe912575ccd78bed170d645c6c959883f463 77f961f43619aeb22549534c421c5e5fa9338347 yaKostin <yaKostin@github.com> 1432330238 +0300	commit: Add user module with auth, add transaction module
+77f961f43619aeb22549534c421c5e5fa9338347 2db9a5c598ac529c5d40afe173430a8d1f4eb857 yaKostin <yaKostin@github.com> 1432407828 +0300	commit: Add AssetBundle for transactions module
+2db9a5c598ac529c5d40afe173430a8d1f4eb857 2db9a5c598ac529c5d40afe173430a8d1f4eb857 yaKostin <yaKostin@github.com> 1432408004 +0300	checkout: moving from master to master

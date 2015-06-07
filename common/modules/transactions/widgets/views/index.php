@@ -27,7 +27,7 @@ $this->title = 'Транзакции';
 
     <?php Pjax::begin(['id' => 'main-grid']); ?>
 
-    <?php echo
+    <?=
 	GridView::widget([
 	    'dataProvider' => $transactionsDataProvider,
 	    //'filterModel' => $model->$searchModel,

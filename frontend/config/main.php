@@ -24,6 +24,9 @@ return [
         'tags' => [
             'class' => 'common\modules\tags\Module',
         ],
+        'reminders' => [
+            'class' => 'common\modules\reminders\Module',
+        ],
     ],
     'components' => [
         'log' => [
