@@ -284,9 +284,7 @@ AppAsset::register($this);
                             </div>
                         </li>
                         <li>
-                            <div id="reminders" class='sidebar-element-linked container-fluid'> 
-                                <i class="fa fa-wrench fa-fw"></i> Напоминания<span class="pull-right"><i class="fa fa-angle-right"></i></span>
-                            </div>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Напоминания<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
                         </li>
                         <li>
                             <div id="tags" class='sidebar-element-linked container-fluid'> 
