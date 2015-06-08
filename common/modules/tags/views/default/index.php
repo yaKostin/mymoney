@@ -28,7 +28,7 @@ use yii\widgets\Pjax;
             'dataProvider' => $tagsDataProvider,
             'export' => false,
             'rowOptions' => function ($model, $key, $index, $grid) {
-                return ['id' => $model['id'], 'onclick' => ' location.href = "index.php?r=site/tag&id=" + this.id', 'style' => 'cursor: pointer;' ];
+                return ['id' => $model['id'], 'onclick' => ' location.href = "/site/tag?id=" + this.id', 'style' => 'cursor: pointer;' ];
             },  
             'columns' => [
                 'name:raw',

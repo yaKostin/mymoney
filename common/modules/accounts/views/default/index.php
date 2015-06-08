@@ -28,7 +28,7 @@ use yii\widgets\Pjax;
             'dataProvider' => $cardsDataProvider,
             'export' => false,
             'rowOptions' => function ($model, $key, $index, $grid) {
-                return ['id' => $model['id'], 'onclick' => ' location.href = "index.php?r=site/account&account=" + this.id', 'style' => 'cursor: pointer;' ];
+                return ['id' => $model['id'], 'onclick' => ' location.href = "/site/account?id=" + this.id', 'style' => 'cursor: pointer;' ];
             },  
             'columns' => [
                 'name:raw',

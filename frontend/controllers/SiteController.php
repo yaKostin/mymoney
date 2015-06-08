@@ -20,11 +20,13 @@ use common\modules\transactions\models\Card;
 use common\modules\tags\models\Tag;
 use common\models\Budget;
 
+use common\modules\reminders\models\Reminder;
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
+    public $defaultAction = 'dashboard';
     /**
      * @inheritdoc
      */
@@ -77,6 +79,24 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    public function actionReminders()
+    {
+        $user_id = Yii::$app->user->identity->id;
+        $reminders = Reminder::getUsersReminders($user_id)->all();
+        $events = [];
+        foreach($reminders as $reminder) {
+            $Event = new \yii2fullcalendar\models\Event();
+            $Event->id = $reminder->id;
+            $Event->title = $reminder->text;
+            $Event->start = date( $reminder->duedate );//date('Y-m-d\TH:m:s\Z');
+            $events[] = $Event;
+        }
+        
+        return $this->render('reminders', [
+            'events' => $events,
+            ]);
+    }
+
     public function actionTag() 
     {
         $user_id = Yii::$app->user->identity->id;
@@ -105,7 +125,7 @@ class SiteController extends Controller
     public function actionAccount() 
     {
         $user_id = Yii::$app->user->identity->id;
-        $card_id = $_GET['account'];
+        $card_id = $_GET['id'];
         $card = Card::find()->where(['id' => $card_id])->one();
         $transactionsDataProvider = new ActiveDataProvider([
             'query' => Transaction::find()->where(['card_id' => $card_id])->orderBy(['id' => SORT_DESC]),
@@ -130,7 +150,7 @@ class SiteController extends Controller
     {
         $user_id = Yii::$app->user->identity->id;
         $transactionsDataProvider = new ActiveDataProvider([
-            'query' => Transaction::find()->where(['card_id' => $user_id])->orderBy(['id' => SORT_DESC]),
+            'query' => Transaction::getUsersTransactions($user_id),
             'pagination' => [
                 'pageSize' => 10,
             ],

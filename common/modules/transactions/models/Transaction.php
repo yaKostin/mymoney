@@ -7,6 +7,7 @@ use yii\db\QueryBuilder;
 
 use common\modules\transactions\models\Transactiontype;
 use common\modules\transactions\models\TransactionTags;
+use common\modules\transactions\models\Card;
 /**
  * This is the model class for table "transaction".
  *
@@ -111,5 +112,14 @@ class Transaction extends \yii\db\ActiveRecord
     public function getTransactionTags()
     {
         return $this->hasMany(TransactionTags::className(), ['id_transaction' => 'id']);
+    }
+
+    public static function getUsersTransactions($user_id) 
+    {
+        return Transaction::find()
+            ->select('transaction.*')
+            ->innerJoin('`card`', '`transaction`.`card_id` = `card`.`id`')
+            ->where(['card.user_id' => $user_id])
+            ->orderBy(['transaction.id' => SORT_DESC]);
     }
 }

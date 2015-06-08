@@ -200,4 +200,5 @@ class User extends ActiveRecord implements IdentityInterface
         return Card::find()->where(['user_id' => $this->id])->all();
         //return $this->hasMany(Card::className(), ['user_id' => $this->id]);
     }
+
 }

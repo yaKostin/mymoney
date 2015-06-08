@@ -6,6 +6,7 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use frontend\widgets\Alert;
 use yii\bootstrap\Modal;
+use yii\helpers\Url;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -234,7 +235,7 @@ AppAsset::register($this);
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="?r=user/profile"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="/user/profile"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
@@ -242,9 +243,9 @@ AppAsset::register($this);
                         <li>
 
                             <?php if (Yii::$app->user->isGuest): ?> 
-                                <a href="http://localhost/mymoney/frontend/web/index.php?r=user/default/login" data-method="post"><i class="fa fa-sign-out fa-fw"></i> Login</a>
+                                <a href="/user/default/login" data-method="post"><i class="fa fa-sign-out fa-fw"></i> Login</a>
                             <?php else: ?>
-                                <a href="http://localhost/mymoney/frontend/web/index.php?r=user/default/logout" data-method="post"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                                <a href="/user/default/logout" data-method="post"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             <?php endif; ?>
                         </li>
                     </ul>
@@ -270,7 +271,7 @@ AppAsset::register($this);
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="?r=site/dashboard"><i class="fa fa-dashboard fa-fw"></i> Инфо<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
+                            <a href="/site/dashboard"><i class="fa fa-dashboard fa-fw"></i> Инфо<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Отчеты<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
@@ -279,31 +280,19 @@ AppAsset::register($this);
                             <a href="#"><i class="fa fa-table fa-fw"></i> Бюджет<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
                         </li>
                         <li>
-                            <div id="cards" class='sidebar-element-linked container-fluid'> 
+                            <div id="cards" class='sidebar-element-linked container-fluid' data-url="/accounts"> 
                                 <i class="fa fa-edit fa-fw"></i> Счета<span class="pull-right"><i class="fa fa-angle-right"></i></span>
                             </div>
                         </li>
                         <li>
-                            <div id="reminders" class='sidebar-element-linked container-fluid'> 
+                            <div id="reminders" class='sidebar-element-linked container-fluid' data-url="/reminders"> 
                                 <i class="fa fa-wrench fa-fw"></i> Напоминания<span class="pull-right"><i class="fa fa-angle-right"></i></span>
                             </div>
                         </li>
                         <li>
-                            <div id="tags" class='sidebar-element-linked container-fluid'> 
+                            <div id="tags" class='sidebar-element-linked container-fluid' data-url="/tags"> 
                                 <i class="fa fa-sitemap fa-fw"></i> Теги<span class="pull-right"><i class="fa fa-angle-right"></i></span>
                             </div>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="blank.html">Blank Page</a>
-                                </li>
-                                <li>
-                                    <a href="login.html">Login Page</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
                         </li>
                     </ul>
                 </div>

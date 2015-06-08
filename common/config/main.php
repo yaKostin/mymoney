@@ -20,6 +20,15 @@ return [
             'identityClass' => 'common\modules\user\models\User',
             'enableAutoLogin' => true,
         ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                // стандартное правило для обработки '/' как 'site/index'
+                
+                
+            ],
+        ],
         'language'=>'ru',
         'sourceLanguage'=>'ru',
     ],

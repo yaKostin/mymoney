@@ -32,8 +32,9 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
+        $user_id = Yii::$app->user->identity->id;
         $reminderDataProvider = new ActiveDataProvider([
-            'query' => Reminder::find(),
+            'query' => Reminder::getUsersReminders($user_id),
         ]);
 
         if (Yii::$app->request->isAjax) {

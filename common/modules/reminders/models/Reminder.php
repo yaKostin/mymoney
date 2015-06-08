@@ -72,4 +72,11 @@ class Reminder extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
+
+    public static function getUsersReminders($user_id) 
+    {
+        return Reminder::find()
+            ->where(['user_id' => $user_id])
+            ->orderBy(['id' => SORT_DESC]);
+    }
 }
