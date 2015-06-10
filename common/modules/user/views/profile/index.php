@@ -5,7 +5,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\modules\user\models\User */
  
-$this->title = Yii::t('app', 'TITLE_PROFILE');
+$this->title = Yii::t('app', 'Профиль');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-profile">
