@@ -65,6 +65,16 @@ class Transaction extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeDelete()
+    {
+        $this->transactionTags[0]->idTag->getTagStats()->one()->changeStats($this, true);
+        if (parent::beforeDelete()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
     * @inheritdoc
     */

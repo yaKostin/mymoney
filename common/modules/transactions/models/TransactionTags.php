@@ -3,7 +3,7 @@
 namespace common\modules\transactions\models;
 
 use Yii;
-
+use common\modules\tags\models\Tag;
 /**
  * This is the model class for table "transaction_tags".
  *

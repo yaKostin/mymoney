@@ -51,12 +51,16 @@ class TagStats extends \yii\db\ActiveRecord
         ];
     }
 
-    public function changeStats($transaction)
+    public function changeStats($transaction, $deleting = false)
     {
+        $sign = 1;
+        if ($deleting) {
+            $sign = -1;
+        }
         if ($transaction->transactiontype->id == 1) {
-            $this->expense += $transaction->amount;
+            $this->expense += $transaction->amount * $sign;
         } else {
-            $this->income += $transaction->amount;
+            $this->income += $transaction->amount * $sign;
         }
         $this->update();
     }
