@@ -46,12 +46,12 @@ use yii\widgets\Pjax;
     <?php Pjax::end(); ?>
 
     <?= ButtonAjax::widget([
-            'name'=>'Добавить',
-            'route'=>['/tags/default/create'],
-            'modalId'=>'#add-tag-modal',
-            'modalContent'=>'#add-tag-content-modal',
-            'options'=>[
-                'class'=>'btn btn-success btn-block',
+            'name' => 'Добавить',
+            'route' => ['/tags/default/create'],
+            'modalId' => '#add-tag-modal',
+            'modalContent' => '#add-tag-content-modal',
+            'options' => [
+                'class' => 'btn btn-success btn-block',
             ]
         ]);
     ?>

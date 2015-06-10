@@ -55,14 +55,16 @@ use yii\widgets\Pjax;
     <?php Pjax::end(); ?>
 
     <?= ButtonAjax::widget([
-            'name'=>'Добавить',
-            'route'=>['/reminders/default/create'],
-            'modalId'=>'#add-reminder-modal',
-            'modalContent'=>'#add-reminder-content-modal',
-            'options'=>[
-                'class'=>'btn btn-success btn-block',
+            'name' => 'Добавить',
+            'route' => ['/reminders/default/create'],
+            'modalId' => '#add-reminder-modal',
+            'modalContent' => '#add-reminder-content-modal',
+            'options' => [
+                'class' => 'btn btn-success btn-block',
             ]
         ]);
     ?>
 
+    <a href="/site/reminders" class="btn btn-success btn-block">Календарь</a>
+    
 </div>

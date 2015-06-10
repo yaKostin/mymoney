@@ -286,12 +286,12 @@ AppAsset::register($this);
                         </li>
                         <li>
                             <div id="reminders" class='sidebar-element-linked container-fluid' data-url="/reminders"> 
-                                <i class="fa fa-wrench fa-fw"></i> Напоминания<span class="pull-right"><i class="fa fa-angle-right"></i></span>
+                                <i class="fa fa-calendar fa-fw"></i> Напоминания<span class="pull-right"><i class="fa fa-angle-right"></i></span>
                             </div>
                         </li>
                         <li>
                             <div id="tags" class='sidebar-element-linked container-fluid' data-url="/tags"> 
-                                <i class="fa fa-sitemap fa-fw"></i> Теги<span class="pull-right"><i class="fa fa-angle-right"></i></span>
+                                <i class="fa fa-tags fa-fw"></i> Теги<span class="pull-right"><i class="fa fa-angle-right"></i></span>
                             </div>
                         </li>
                     </ul>

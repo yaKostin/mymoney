@@ -7,6 +7,7 @@ use Yii;
 use common\modules\user\models\LoginForm;
 use common\modules\user\models\PasswordResetRequestForm;
 use common\modules\user\models\ResetPasswordForm;
+use common\modules\user\models\SignupForm;
 
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -40,6 +41,22 @@ class DefaultController extends Controller
                 ],
             ],
         ];
+    }
+
+    public function actionSignup()
+    {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
+        }
+
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
     }
 
     public function actionLogin()

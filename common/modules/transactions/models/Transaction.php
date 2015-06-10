@@ -8,6 +8,8 @@ use yii\db\QueryBuilder;
 use common\modules\transactions\models\Transactiontype;
 use common\modules\transactions\models\TransactionTags;
 use common\modules\transactions\models\Card;
+use common\modules\tags\models\TagStats;
+use common\modules\tags\models\Tag;
 /**
  * This is the model class for table "transaction".
  *
@@ -77,7 +79,11 @@ class Transaction extends \yii\db\ActiveRecord
             
             self::getDb()->createCommand()
                 ->batchInsert(TransactionTags::tableName(), ['id_transaction', 'id_tag'], $values)->execute();
-         
+
+            $firstTag = Tag::find()->where(['id' => $this->tags[0] ])->one();
+            $firstTagStats = $firstTag->getTagStats()->one();
+            $firstTagStats->changeStats($this);
+            
             parent::afterSave($insert, $changedAttributes);
         }
     }
@@ -121,5 +127,31 @@ class Transaction extends \yii\db\ActiveRecord
             ->innerJoin('`card`', '`transaction`.`card_id` = `card`.`id`')
             ->where(['card.user_id' => $user_id])
             ->orderBy(['transaction.id' => SORT_DESC]);
+    }
+
+    public static function getUsersTransactionsByTag($user_id, $tag_id) 
+    {
+        return Transaction::find()
+            ->select('transaction.*')
+            ->innerJoin('`card`', '`transaction`.`card_id` = `card`.`id`')
+            ->innerJoin('`transaction_tags`', '`transaction`.`id` = `transaction_tags`.`id_transaction`')
+            ->where(['card.user_id' => $user_id, 'transaction_tags.id_tag' => $tag_id])
+            ->orderBy(['transaction.id' => SORT_DESC]);
+    }
+
+    public static function getUsersTransactionsAmountByTags($user_id, $tags) 
+    {
+        $transactionsByTags = [];
+        for ($i = 0; $i < count($tags); $i++) {
+            $transactionsByTags[$i] = Transaction::getUsersTransactionsByTag($user_id, $tags[$i]->id)->All();
+        }
+        $amountsByTags = [];
+        for ($i = 0; $i < count($transactionsByTags); $i++) {
+            $amountsByTags[$i] = 0;
+            for ($j = 0; $j < count($transactionsByTags[$i]); $j++) { 
+                $amountsByTags[$i] += $transactionsByTags[$i][$j]->amount;
+            }
+        }
+        return $amountsByTags;
     }
 }

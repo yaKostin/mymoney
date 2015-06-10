@@ -69,10 +69,6 @@ $('#add-reminder-modal').on('shown.bs.modal', function (e) {
     $('#add-reminder-modal').appendTo("body");    
 });
 
-$('#main-modal').on('shown.bs.modal', function (e) {
-    $('#add-reminder-modal').appendTo("body");    
-});
-
 $(function () {
     var dateNow = new Date();
     $('#reminder-duedate').parent().datepicker('update', new Date());

@@ -6,7 +6,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use common\modules\transactions\models\Transaction;
-use common\modules\transactions\models\Tag;
+use common\modules\tags\models\Tag;
 use common\modules\user\models\User;
 
 
@@ -32,7 +32,7 @@ class DefaultController extends Controller
     public function actionCreate()
     {
         $model = new Transaction();
-
+        $user_id = Yii::$app->user->identity->id;
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
                 echo 1;
@@ -43,7 +43,7 @@ class DefaultController extends Controller
         } else {
             $transactiontypeArray = Transaction::getTransactiontypeArray();
             $cardArray = Yii::$app->user->identity->getCardArray();
-            $tagArray = Tag::find()->orderBy(['name' => SORT_ASC])->All();
+            $tagArray = Tag::getUsersTags($user_id)->orderBy(['name' => SORT_ASC])->All();
             return $this->renderAjax('create', [
                     'model' => $model,
                     'transactiontypeArray' => $transactiontypeArray,
@@ -63,7 +63,7 @@ class DefaultController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['site/dashboard']);        
+        return $this->redirect(['/site/dashboard']);        
     }
 
     /**

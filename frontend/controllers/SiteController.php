@@ -102,8 +102,9 @@ class SiteController extends Controller
         $user_id = Yii::$app->user->identity->id;
         $tag_id = $_GET['id'];
         $tag = Tag::find()->where(['id' => $tag_id])->one();
+        $tagStats = $tag->getTagStats()->one();
         $transactionsDataProvider = new ActiveDataProvider([
-            'query' => $tag->getTransactions(),
+            'query' => Transaction::getUsersTransactionsByTag($user_id, $tag_id),
             'pagination' => [
                 'pageSize' => 10,
             ],
@@ -118,6 +119,7 @@ class SiteController extends Controller
         return $this->render('tag', [
                 'transactionsDataProvider' => $transactionsDataProvider,
                 'tag' => $tag,
+                'tagStats' => $tagStats,
             ]);
     }
 
@@ -148,6 +150,17 @@ class SiteController extends Controller
 
     public function actionDashboard()
     {
+        $color = [
+            '#F7464A',
+            '#46BFBD',
+            '#FDB45C',
+            '#F7464A',
+            '#46BFBD',
+            '#FDB45C',
+            '#F7464A',
+            '#46BFBD',
+            '#FDB45C',
+        ];
         $user_id = Yii::$app->user->identity->id;
         $transactionsDataProvider = new ActiveDataProvider([
             'query' => Transaction::getUsersTransactions($user_id),
@@ -162,10 +175,35 @@ class SiteController extends Controller
                 ]
         ]);
 
+        $tags = Tag::getUsersTags($user_id)->All();
+
+        $datasets = [];
+        for ($i = 0; $i < count($tags); $i++) { 
+            $tagStats = $tags[$i]->getTagStats()->one();
+            if (is_object($tagStats)) {
+                $datasets[] = [
+                    'value' => $tagStats->expense,
+                    'color' => $color[$i],
+                    'label' => $tagStats->tag->name
+                ];
+            }
+        }
+
+        $expenseChartConfig = [
+            'type' => 'Doughnut',
+            'options' => [
+                'height' => 400,
+                'width' => 400,
+            ],
+            'data' => $datasets,
+        ];
+
         $budget = Budget::find()->where(['user_id' => $user_id])->one();
         return $this->render('dashboard', [
                 'transactionsDataProvider' => $transactionsDataProvider,
-                'budget' => $budget
+                'budget' => $budget,
+                'data' => $datasets,
+                'expenseChartConfig' => $expenseChartConfig,
             ]);
     }
 
@@ -191,22 +229,5 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
-
-    public function actionSignup()
-    {
-        $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
-                }
-            }
-        }
-
-        return $this->render('signup', [
-            'model' => $model,
-        ]);
-    }
-
   
 }

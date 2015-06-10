@@ -12,14 +12,14 @@ use yii\bootstrap\Modal;
 ?>
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Dashboard</h1>
+        <h1 class="page-header">Общие сведения</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
 	<div class="row">
 		<div class="col-lg-4 col-md-6">
-            <div class="panel panel-green">
+            <div class="panel panel-yellow">
             	<a href="#">
                     <div class="panel-footer">
                         <span class="pull-left">Баланс</span>
@@ -61,7 +61,7 @@ use yii\bootstrap\Modal;
 		</div>
 
 		<div class="col-lg-4 col-md-6">
-            <div class="panel panel-yellow">
+            <div class="panel panel-green">
             	<a href="#">
                     <div class="panel-footer">
                         <span class="pull-left">Поступления</span>
@@ -83,36 +83,8 @@ use yii\bootstrap\Modal;
 	</div>
 
 	<div class="row">
-	<div class="col-md-12">
-	<?= ChartJs::widget([
-    'type' => 'Doughnut',
-    'options' => [
-        'height' => 400,
-        'width' => 400,
-            //String - A legend template
-    ],
-    'data' => [
-    	[
-	        'value' => 300,
-	        'color' => "#F7464A",
-	        'highlight' => "#FF5A5E",
-	        'label' => "Red"
-    	],
-	    [
-	        'value' => 50,
-	        'color' => "#46BFBD",
-	        'highlight' => "#5AD3D1",
-	        'label' => "Green"
-	    ],
-	    [
-	        'value' => 100,
-	        'color' => "#FDB45C",
-	        'highlight' => "#FFC870",
-	        'label' => "Yellow"
-	    ]
-]
-]);
-?>
-</div>
-</div>
+    	<div class="col-md-12">
+        	<?= ChartJs::widget($expenseChartConfig); ?>
+        </div>
+    </div>
 	<?= TransactionsWidget::widget(['transactionsDataProvider' => $transactionsDataProvider]) ?>
