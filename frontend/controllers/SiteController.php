@@ -26,7 +26,7 @@ use common\modules\reminders\models\Reminder;
  */
 class SiteController extends Controller
 {
-    public $defaultAction = 'dashboard';
+    //public $defaultAction = 'dashboard';
     /**
      * @inheritdoc
      */
@@ -35,15 +35,15 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['logout', 'signup', 'dashboard', 'tag', 'reminders', 'account'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
+                        'actions' => ['signup', 'index'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'dashboard', 'tag', 'reminders', 'account'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -74,9 +74,19 @@ class SiteController extends Controller
         ];
     }
 
+    public function actionLogin() 
+    {
+        return $this->redirect('/user/default/login');
+    }
+
     public function actionIndex()
     {
-        return $this->render('index');
+        if (Yii::$app->user->isGuest) {
+            $this->layout = 'guest.php';
+            return $this->render('index');    
+        } else {
+            return $this->redirect('/site/dashboard');
+        }
     }
 
     public function actionReminders()
@@ -160,6 +170,9 @@ class SiteController extends Controller
             '#F7464A',
             '#46BFBD',
             '#FDB45C',
+            '#46BFBD',
+            '#FDB45C',
+            '#F7464A',
         ];
         $user_id = Yii::$app->user->identity->id;
         $transactionsDataProvider = new ActiveDataProvider([
@@ -177,11 +190,11 @@ class SiteController extends Controller
 
         $tags = Tag::getUsersTags($user_id)->All();
 
-        $datasets = [];
+        $expenseDatasets = [];
         for ($i = 0; $i < count($tags); $i++) { 
             $tagStats = $tags[$i]->getTagStats()->one();
             if (is_object($tagStats)) {
-                $datasets[] = [
+                $expenseDatasets[] = [
                     'value' => $tagStats->expense,
                     'color' => $color[$i],
                     'label' => $tagStats->tag->name
@@ -192,17 +205,17 @@ class SiteController extends Controller
         $expenseChartConfig = [
             'type' => 'Doughnut',
             'options' => [
-                'height' => 400,
-                'width' => 400,
+                'height' => 300,
+                'width' => 300,
             ],
-            'data' => $datasets,
+            'data' => $expenseDatasets,
         ];
 
         $budget = Budget::find()->where(['user_id' => $user_id])->one();
         return $this->render('dashboard', [
                 'transactionsDataProvider' => $transactionsDataProvider,
                 'budget' => $budget,
-                'data' => $datasets,
+                'data' => $expenseDatasets,
                 'expenseChartConfig' => $expenseChartConfig,
             ]);
     }

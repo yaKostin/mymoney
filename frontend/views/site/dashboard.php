@@ -9,6 +9,7 @@ use dosamigos\chartjs\ChartJs;
 use kartik\select2\Select2;
 use yii\web\JsExpression;
 use yii\bootstrap\Modal;
+use yii\bootstrap\Panel;
 ?>
 <div class="row">
     <div class="col-lg-12">
@@ -83,8 +84,29 @@ use yii\bootstrap\Modal;
 	</div>
 
 	<div class="row">
-    	<div class="col-md-12">
-        	<?= ChartJs::widget($expenseChartConfig); ?>
+    	<div class="col-lg-4">
+            <?= lagman\bootstrap\Panel::widget([
+                'type' => 'warning',
+                'header' => '<i class="fa fa-bar-chart-o fa-fw"> </i>
+                        Затраты по тегам',
+                'content' => ChartJs::widget($expenseChartConfig),
+            ]) ?>
+        </div>
+        <div class="col-lg-4">
+            <?= lagman\bootstrap\Panel::widget([
+                'type' => 'danger',
+                'header' => '<i class="fa fa-bar-chart-o fa-fw"> </i>
+                        Затраты по тегам',
+                'content' => ChartJs::widget($expenseChartConfig),
+            ]) ?>
+        </div>
+        <div class="col-lg-4">
+            <?= lagman\bootstrap\Panel::widget([
+                'type' => 'success',
+                'header' => '<i class="fa fa-bar-chart-o fa-fw"> </i>
+                        Поступления по тегам',
+                'content' => ChartJs::widget($expenseChartConfig),
+            ]) ?>
         </div>
     </div>
 	<?= TransactionsWidget::widget(['transactionsDataProvider' => $transactionsDataProvider]) ?>
