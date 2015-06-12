@@ -27,7 +27,7 @@ AppAsset::register($this);
   
     <div id="wrapper">
     <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -297,11 +297,12 @@ AppAsset::register($this);
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
+                <div id="sidebar-content-panel"> </div>   
             </div>
             <!-- /.navbar-static-side -->
         </nav>
         
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="padding-top: 50px">
             <div id="sidebar-content-panel"> </div>   
             <?= $content ?>
         </div>

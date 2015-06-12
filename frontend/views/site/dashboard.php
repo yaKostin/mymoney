@@ -84,29 +84,59 @@ use yii\bootstrap\Panel;
 	</div>
 
 	<div class="row">
-    	<div class="col-lg-4">
-            <?= lagman\bootstrap\Panel::widget([
-                'type' => 'warning',
-                'header' => '<i class="fa fa-bar-chart-o fa-fw"> </i>
-                        Затраты по тегам',
-                'content' => ChartJs::widget($expenseChartConfig),
-            ]) ?>
+    	<div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"> </i>
+                    Затраты по картам
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <?= ChartJs::widget($cardsExpenseChartConfig) ?>
+                        </div>
+                        <div class="col-xs-1">
+                            <div id="chartLegend_w0"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-4">
-            <?= lagman\bootstrap\Panel::widget([
-                'type' => 'danger',
-                'header' => '<i class="fa fa-bar-chart-o fa-fw"> </i>
-                        Затраты по тегам',
-                'content' => ChartJs::widget($expenseChartConfig),
-            ]) ?>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"> </i>
+                    Затраты по тегам
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <?= ChartJs::widget($expenseChartConfig) ?>
+                        </div>
+                        <div class="col-xs-1">
+                            <div id="chartLegend_w1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-4">
-            <?= lagman\bootstrap\Panel::widget([
-                'type' => 'success',
-                'header' => '<i class="fa fa-bar-chart-o fa-fw"> </i>
-                        Поступления по тегам',
-                'content' => ChartJs::widget($expenseChartConfig),
-            ]) ?>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"> </i>
+                    Поступления по тегам
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <?= ChartJs::widget($incomeChartConfig) ?>
+                        </div>
+                        <div class="col-xs-1">
+                            <div id="chartLegend_w2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 	<?= TransactionsWidget::widget(['transactionsDataProvider' => $transactionsDataProvider]) ?>

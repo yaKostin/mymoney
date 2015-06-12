@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id
  * @property integer $user_id
  * @property integer $cardtype_id
- * @property integer $amount
+ * @property string $amount
  * @property integer $currency_id
  * @property integer $bank_id
  * @property string $name
@@ -19,6 +19,7 @@ use Yii;
  * @property Cardtype $cardtype
  * @property Currency $currency
  * @property User $user
+ * @property CardStats[] $cardStats 
  * @property Transaction[] $transactions
  */
 class Card extends \yii\db\ActiveRecord
@@ -38,7 +39,8 @@ class Card extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'cardtype_id', 'amount', 'bank_id'], 'required'],
-            [['user_id', 'cardtype_id', 'amount', 'currency_id', 'bank_id'], 'integer'],
+            [['user_id', 'cardtype_id', 'currency_id', 'bank_id'], 'integer'],
+            [['amount'], 'number'],
             [['name'], 'string', 'max' => 45]
         ];
     }
@@ -75,6 +77,13 @@ class Card extends \yii\db\ActiveRecord
         return $this->hasOne(Cardtype::className(), ['id' => 'cardtype_id']);
     }
 
+    /**
+    * @return \yii\db\ActiveQuery
+    */
+    public function getCardStats() 
+    { 
+        return $this->hasOne(CardStats::className(), ['card_id' => 'id']); 
+    } 
     /**
      * @return \yii\db\ActiveQuery
      */

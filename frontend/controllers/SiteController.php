@@ -152,29 +152,41 @@ class SiteController extends Controller
                 ]
         ]);
 
+
+        $cardsExpense = [];
+        $cardsIncome = [];
+        $cardsExpenseDataSets = [];
+        foreach ($cards as $card) {
+            $cardStats = $card->getCardStats()->one();
+            $color = $this->rand_color();
+            $cardsExpenseDataSets[] = [
+                'value' => $cardStats->expense,
+                'color' => $color,
+                'label' => $card->name,
+            ];
+        }
+        $cardsExpenseChartConfig = [
+            'type' => 'Doughnut',
+            'options' => [
+                'width' => $chartWidth,
+                'height' => $chartHeight,
+            ], 
+            'data' => $cardsExpenseDataSets,
+        ];
+
         return $this->render('account', [
                 'transactionsDataProvider' => $transactionsDataProvider,
                 'card' => $card,
             ]);
     }
 
+    function rand_color() {
+        return '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
+    }
     public function actionDashboard()
     {
-        $color = [
-            '#F7464A',
-            '#46BFBD',
-            '#FDB45C',
-            '#F7464A',
-            '#46BFBD',
-            '#FDB45C',
-            '#F7464A',
-            '#46BFBD',
-            '#FDB45C',
-            '#46BFBD',
-            '#FDB45C',
-            '#F7464A',
-        ];
         $user_id = Yii::$app->user->identity->id;
+        $budget = Budget::find()->where(['user_id' => $user_id])->one();
         $transactionsDataProvider = new ActiveDataProvider([
             'query' => Transaction::getUsersTransactions($user_id),
             'pagination' => [
@@ -191,32 +203,90 @@ class SiteController extends Controller
         $tags = Tag::getUsersTags($user_id)->All();
 
         $expenseDatasets = [];
+        $incomeDatasets = [];
+        $sumExpenseByTags = 0;
+        $sumIncomeByTags = 0;
         for ($i = 0; $i < count($tags); $i++) { 
             $tagStats = $tags[$i]->getTagStats()->one();
             if (is_object($tagStats)) {
+                $color = $this->rand_color();
                 $expenseDatasets[] = [
                     'value' => $tagStats->expense,
-                    'color' => $color[$i],
+                    'color' => $color,
                     'label' => $tagStats->tag->name
                 ];
+                $incomeDatasets[] = [
+                    'value' => $tagStats->income,  
+                    'color' => $color,
+                    'label' => $tagStats->tag->name
+                ];
+                $sumExpenseByTags += $tagStats->expense;
+                $sumIncomeByTags += $tagStats->income;
             }
         }
 
+        $expenseDatasets[] = [
+            'value' => $budget->expense - $sumExpenseByTags,
+            'color' => 'green',
+            'label' => 'без тегов'
+        ];
+        $incomeDatasets[] = [  
+            'value' => $budget->income - $sumIncomeByTags,
+            'color' => 'green',
+            'label' => 'без тегов'
+        ];
+        $chartWidth = 250;
+        $chartHeight = 250;
         $expenseChartConfig = [
             'type' => 'Doughnut',
             'options' => [
-                'height' => 300,
-                'width' => 300,
+                'width' => $chartWidth,
+                'height' => $chartHeight,
             ],
             'data' => $expenseDatasets,
         ];
+        $incomeChartConfig = [
+            'type' => 'Doughnut',
+            'options' => [
+                'width' => $chartWidth,
+                'height' => $chartHeight,
+            ],
+            'data' => $incomeDatasets,
+        ];
 
-        $budget = Budget::find()->where(['user_id' => $user_id])->one();
+        $cards = Yii::$app->user->identity->getCardArray();
+        $cardsExpense = [];
+        $cardsIncome = [];
+        $cardsExpenseDataSets = [];
+        foreach ($cards as $card) {
+            $cardStats = $card->getCardStats()->one();
+            $color = $this->rand_color();
+            $cardsExpenseDataSets[] = [
+                'value' => $cardStats->expense,
+                'color' => $color,
+                'label' => $card->name,
+            ];
+        }
+        $cardsExpenseChartConfig = [
+            'type' => 'Doughnut',
+            'options' => [
+                'width' => $chartWidth,
+                'height' => $chartHeight,
+            ], 
+            'data' => $cardsExpenseDataSets,
+        ];
+
+        $cardsExpeseCount = [];
+        $cardsIncomeCount = [];
+        //$cards
+        
         return $this->render('dashboard', [
                 'transactionsDataProvider' => $transactionsDataProvider,
                 'budget' => $budget,
                 'data' => $expenseDatasets,
                 'expenseChartConfig' => $expenseChartConfig,
+                'incomeChartConfig' => $incomeChartConfig,
+                'cardsExpenseChartConfig' => $cardsExpenseChartConfig,
             ]);
     }
 

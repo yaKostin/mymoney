@@ -149,3 +149,7 @@ a.desc:after {
 .btn-centered {
     width: 250px;
 }
+
+ul {
+    list-style: none;    
+}

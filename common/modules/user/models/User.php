@@ -20,6 +20,8 @@ use common\modules\accounts\models\Card;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ *
+ * @property Card[] $cards
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -213,5 +215,4 @@ class User extends ActiveRecord implements IdentityInterface
         return Card::find()->where(['user_id' => $this->id])->all();
         //return $this->hasMany(Card::className(), ['user_id' => $this->id]);
     }
-
 }

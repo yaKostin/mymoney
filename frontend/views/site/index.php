@@ -6,7 +6,7 @@ $this->title = 'My Yii Application';
 
     <div class="jumbotron">
         <div class="home-content">
-            <h1>Система учета личных расходов</h1>
+            <h1 style="background: black">Система учета личных расходов</h1>
             <p class="lead">Костин Ярослав</p>
 
             <div class="row" style="padding-top: 250px;">

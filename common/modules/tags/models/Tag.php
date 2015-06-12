@@ -83,19 +83,7 @@ class Tag extends \yii\db\ActiveRecord
             ->hasMany(Transaction::className(), ['id' => 'id_transaction'])
             ->viaTable(TransactionTags::tableName(), ['id_tag' => 'id']);       
     }
-
-    public function getUserTransactions($user_id) 
-    {
-        return $this
-            ->hasMany(Transaction::className(), ['id' => 'id_transaction'])
-            ->viaTable(TransactionTags::tableName(), ['id_tag' => 'id'])
-            ->with([    // this is for the related models
-                'posts' => function($query) use ($searchword) {
-                    $query->where(['like', 'post.title', $searchword]);
-                },
-            ]);       
-    }
-
+    
     /**
     * @return \yii\db\ActiveQuery
     */
@@ -103,23 +91,5 @@ class Tag extends \yii\db\ActiveRecord
     {
         return $this->hasOne(TagStats::className(), ['tag_id' => 'id']);
         //return TagStats::find()->where(['tag_id' => 'id'])->one();
-    }
-
-    public static function getAllUsersTransactionsByTags($user_id) 
-    {
-        $tags = Tag::find()->All();
-        $transactionsByTags = [];
-        for ($i = 0; $i < count($tags); $i++ ) {
-            $transactionsByTags[$i] = Transaction:: $tags[$i]->getUserTransactions($user_id)->All();
-        } 
-        $transactionDataByTags = [];
-        for ($i = 0; $i < count($transactionsByTags); $i++) {
-            $transactionDataByTags[$i] = 0;
-            for ($j = 0; $j < count($transactionsByTags[$i]); $j++) {
-                $transactionDataByTags[$i] += $transactionsByTags[$i][$j]->amount;
-            }
-        
-        }
-        return $transactionDataByTags;
     }
 }
