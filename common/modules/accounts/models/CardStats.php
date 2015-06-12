@@ -12,8 +12,8 @@ use Yii;
  * @property string $income
  * @property string $expense
  * @property string $limit
- * @property integer $expense_cout
- * @property integer $income_cout
+ * @property integer $expense_count
+ * @property integer $income_count
  *
  * @property Card $card
  */

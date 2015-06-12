@@ -274,7 +274,7 @@ AppAsset::register($this);
                             <a href="/site/dashboard"><i class="fa fa-dashboard fa-fw"></i> Инфо<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Отчеты<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
+                            <a href="/site/reports"><i class="fa fa-bar-chart-o fa-fw"></i> Отчеты<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-table fa-fw"></i> Бюджет<span class="pull-right"><i class="fa fa-angle-right"></i></span></a>
