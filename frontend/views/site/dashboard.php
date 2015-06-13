@@ -106,24 +106,6 @@ use yii\bootstrap\Panel;
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-bar-chart-o fa-fw"> </i>
-                    Затраты по тегам
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <?= ChartJs::widget($expenseChartConfig) ?>
-                        </div>
-                        <div class="col-xs-1">
-                            <div id="chartLegend_w1"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-bar-chart-o fa-fw"> </i>
                     Поступления по тегам
                 </div>
                 <div class="panel-body">
@@ -132,7 +114,7 @@ use yii\bootstrap\Panel;
                             <?= ChartJs::widget($incomeChartConfig) ?>
                         </div>
                         <div class="col-xs-1">
-                            <div id="chartLegend_w2"></div>
+                            <div id="chartLegend_w1"></div>
                         </div>
                     </div>
                 </div>

@@ -27,14 +27,8 @@ use dosamigos\datepicker\DatePicker;
                 ])   
             ?> 
 
-    <?= $form->field($model, 'repeattype_id')->textInput() ?>
-
-    <?= $form->field($model, 'repeatcount')->textInput() ?>
-
-    <?= $form->field($model, 'sendemail')->textInput() ?>
-
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

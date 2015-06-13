@@ -198,31 +198,38 @@ class SiteController extends Controller
             $tagStats = $tags[$i]->getTagStats()->one();
             if (is_object($tagStats)) {
                 $color = $this->rand_color();
-                $expenseDatasets[] = [
-                    'value' => $tagStats->expense,
-                    'color' => $color,
-                    'label' => $tagStats->tag->name
-                ];
-                $incomeDatasets[] = [
-                    'value' => $tagStats->income,  
-                    'color' => $color,
-                    'label' => $tagStats->tag->name
-                ];
+                if ($tagStats->expense > 1) {
+                    $expenseDatasets[] = [
+                        'value' => $tagStats->expense,
+                        'color' => $color,
+                        'label' => $tagStats->tag->name
+                    ];
+                }
+                if ($tagStats->income > 1) {
+                    $incomeDatasets[] = [
+                        'value' => $tagStats->income,  
+                        'color' => $color,
+                        'label' => $tagStats->tag->name
+                    ];
+                }
                 $sumExpenseByTags += $tagStats->expense;
                 $sumIncomeByTags += $tagStats->income;
             }
         }
-
-        $expenseDatasets[] = [
-            'value' => $budget->expense - $sumExpenseByTags,
-            'color' => 'green',
-            'label' => 'без тегов'
-        ];
-        $incomeDatasets[] = [  
-            'value' => $budget->income - $sumIncomeByTags,
-            'color' => 'green',
-            'label' => 'без тегов'
-        ];
+        if ($budget->expense > $sumExpenseByTags ) {
+            $expenseDatasets[] = [
+                'value' => $budget->expense - $sumExpenseByTags,
+                'color' => 'green',
+                'label' => 'без тегов'
+            ];
+        }
+        if ($budget->income > $sumIncomeByTags ) {
+            $incomeDatasets[] = [  
+                'value' => $budget->income - $sumIncomeByTags,
+                'color' => 'green',
+                'label' => 'без тегов'
+            ];
+        }
         $chartWidth = 250;
         $chartHeight = 250;
         $expenseChartConfig = [
@@ -349,31 +356,38 @@ class SiteController extends Controller
             $tagStats = $tags[$i]->getTagStats()->one();
             if (is_object($tagStats)) {
                 $color = $this->rand_color();
-                $expenseDatasets[] = [
-                    'value' => $tagStats->expense,
-                    'color' => $color,
-                    'label' => $tagStats->tag->name
-                ];
-                $incomeDatasets[] = [
-                    'value' => $tagStats->income,  
-                    'color' => $color,
-                    'label' => $tagStats->tag->name
-                ];
+                if ($tagStats->expense > 1) {
+                    $expenseDatasets[] = [
+                        'value' => $tagStats->expense,
+                        'color' => $color,
+                        'label' => $tagStats->tag->name
+                    ];
+                }
+                if ($tagStats->income > 1) {
+                    $incomeDatasets[] = [
+                        'value' => $tagStats->income,  
+                        'color' => $color,
+                        'label' => $tagStats->tag->name
+                    ];
+                }
                 $sumExpenseByTags += $tagStats->expense;
                 $sumIncomeByTags += $tagStats->income;
             }
         }
-
-        $expenseDatasets[] = [
-            'value' => $budget->expense - $sumExpenseByTags,
-            'color' => 'green',
-            'label' => 'без тегов'
-        ];
-        $incomeDatasets[] = [  
-            'value' => $budget->income - $sumIncomeByTags,
-            'color' => 'green',
-            'label' => 'без тегов'
-        ];
+        if ($budget->expense > $sumExpenseByTags ) {
+            $expenseDatasets[] = [
+                'value' => $budget->expense - $sumExpenseByTags,
+                'color' => 'green',
+                'label' => 'без тегов'
+            ];
+        }
+        if ($budget->income > $sumIncomeByTags ) {
+            $incomeDatasets[] = [  
+                'value' => $budget->income - $sumIncomeByTags,
+                'color' => 'green',
+                'label' => 'без тегов'
+            ];
+        }
         $chartWidth = 250;
         $chartHeight = 250;
         $expenseChartConfig = [

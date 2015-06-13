@@ -25,9 +25,6 @@ use yii\widgets\Pjax;
     ?>
     <div class="row">
         <div class="col-md-1"> <h3> Напоминания </h3></div>
-        <a href="/reminders/default/change"> 
-            <div class="col-md-1 pull-right"> <h3> Изменить </h3> </div>
-        </a>
     </div>
 
     <?php Pjax::begin(['id' => 'reminders-grid']); ?>

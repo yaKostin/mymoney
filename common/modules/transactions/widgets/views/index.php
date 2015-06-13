@@ -91,7 +91,7 @@ $this->title = 'Транзакции';
         ],
         //'resizableColumns' => true,
         'panel' => [
-            'type' => GridView::TYPE_PRIMARY,
+            'type' => GridView::TYPE_DEFAULT,
             'heading' => $this->title,
             'before' => ButtonAjax::widget([
 				            'name'=>'Создать',

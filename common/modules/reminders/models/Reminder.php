@@ -34,7 +34,7 @@ class Reminder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'duedate', 'repeattype_id', 'repeatcount'], 'required'],
+            [['user_id', 'duedate',], 'required'],
             [['user_id', 'repeattype_id', 'repeatcount', 'sendemail'], 'integer'],
             [['duedate'], 'safe'],
             [['text'], 'string', 'max' => 90]

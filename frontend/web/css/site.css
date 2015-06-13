@@ -3,6 +3,29 @@ body {
     height: 100%;
 }
 
+#sidebar-content-panel {
+        position: fixed;        
+        left: 200px;
+        top: 0px;
+        width: 300px;
+        height: 100%;
+        background-color: #e7e7e7;     
+        display: none;   
+}
+
+.sidebar-element-linked {
+    line-height: 41px;
+    min-height: 41px;
+    vertical-align: middle;
+    color: #337ab7;
+}
+
+.sidebar-element-linked:hover {
+    color: black;
+    background-color: #eee; 
+    cursor: pointer;
+}
+
 .wrap {
     min-height: 100%;
     height: auto;
