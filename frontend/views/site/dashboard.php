@@ -19,7 +19,7 @@ use yii\bootstrap\Panel;
 </div>
 <!-- /.row -->
 	<div class="row">
-		<div class="col-lg-4 col-md-6">
+		<div class="col-md-4">
             <div class="panel panel-yellow">
             	<a href="#">
                     <div class="panel-footer">
@@ -40,7 +40,7 @@ use yii\bootstrap\Panel;
             </div>
 		</div>
 		
-		<div class="col-lg-4 col-md-6">
+		<div class="col-md-4 ">
             <div class="panel panel-red">
             	<a href="#">
                     <div class="panel-footer">
@@ -61,7 +61,7 @@ use yii\bootstrap\Panel;
             </div>
 		</div>
 
-		<div class="col-lg-4 col-md-6">
+		<div class="col-md-4 ">
             <div class="panel panel-green">
             	<a href="#">
                     <div class="panel-footer">
@@ -88,12 +88,16 @@ use yii\bootstrap\Panel;
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-bar-chart-o fa-fw"> </i>
-                    Затраты по картам
+                    Расходы по картам
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-4">
-                            <?= ChartJs::widget($cardsExpenseChartConfig) ?>
+                        <div class="col-xs-6">
+                            <?php if (count($cardsExpenseChartConfig['data']) == 0): ?>
+                                <h1>Нет расходов</h1>
+                            <?php else: ?>
+                                <?= ChartJs::widget($cardsExpenseChartConfig) ?>
+                            <?php endif; ?>
                         </div>
                         <div class="col-xs-1">
                             <div id="chartLegend_w0"></div>
@@ -106,12 +110,16 @@ use yii\bootstrap\Panel;
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-bar-chart-o fa-fw"> </i>
-                    Поступления по тегам
+                    Расходы по тегам
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-4">
-                            <?= ChartJs::widget($incomeChartConfig) ?>
+                        <div class="col-xs-6">
+                            <?php if (count($incomeChartConfig['data']) == 0): ?>
+                                <h1>Нет расходов</h1>
+                            <?php else: ?>
+                                <?= ChartJs::widget($expenseChartConfig) ?>
+                            <?php endif; ?>
                         </div>
                         <div class="col-xs-1">
                             <div id="chartLegend_w1"></div>

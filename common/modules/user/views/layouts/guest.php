@@ -23,7 +23,7 @@ AppAsset::register($this);
 	<div class="wrapper">
 		<div class="news-feed">
 			<div class="news-image">
-				<img src="http://seantheme.com/color-admin-v1.7/admin/html/assets/img/login-bg/bg-8.jpg" class="faded">
+				<?= Html::img('@web/img/bg-signup.jpg', ['class'=>'faded']); ?>
 			</div>
 		</div>
 	    <div id="page-wrapper" style="float:right; width:500px; height:100%; ">

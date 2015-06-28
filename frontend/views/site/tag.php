@@ -13,7 +13,7 @@ $this->title = $tag->name;
 <!-- /.row -->
 
 <div class="row">
-		<div class="col-lg-4 col-md-6">
+		<div class="col-md-4">
             <div class="panel panel-yellow">
             	<a href="#">
                     <div class="panel-footer">
@@ -33,7 +33,7 @@ $this->title = $tag->name;
                 </div>
             </div>
 		</div>
-		<div class="col-lg-4 col-md-6">
+		<div class="col-md-4">
             <div class="panel panel-red">
             	<a href="#">
                     <div class="panel-footer">
@@ -53,7 +53,7 @@ $this->title = $tag->name;
                 </div>
             </div>
 		</div>
-		<div class="col-lg-4 col-md-6">
+		<div class="col-md-4">
             <div class="panel panel-green">
             	<a href="#">
                     <div class="panel-footer">

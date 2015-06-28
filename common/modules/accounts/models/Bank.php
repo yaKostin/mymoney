@@ -11,7 +11,6 @@ use Yii;
  * @property string $name
  *
  * @property Card[] $cards
- * @property Merchant[] $merchants
  */
 class Bank extends \yii\db\ActiveRecord
 {
@@ -52,13 +51,5 @@ class Bank extends \yii\db\ActiveRecord
     public function getCards()
     {
         return $this->hasMany(Card::className(), ['bank_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMerchants()
-    {
-        return $this->hasMany(Merchant::className(), ['bank_id' => 'id']);
     }
 }

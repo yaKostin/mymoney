@@ -67,7 +67,14 @@ $this->title = 'Транзакции';
                         return $sign . ' ' . $model->amount;
                     }
                 ],
-            'trdate:raw:Дата',
+            [
+                'attribute' => 'trdate',
+                'label' => 'Дата',
+                'value' => function($model, $index, $widget) {
+                    $date = new DateTime($model->trdate);
+                    return  $date->format("d-M");// $tagsStr;                    
+                },
+            ],
             'card.name:raw:Карта',
             //'transactiontype.name:raw:Тип',
             [
@@ -100,7 +107,7 @@ $this->title = 'Транзакции';
 				            'modalContent'=>'#main-content-modal',
 				            'options'=>[
 				                'class'=>'btn btn-success',
-				                'title'=>'Button for create application',
+				                'title'=>'Добавить новую транзакцию',
 				            ]
         				]),
         ],

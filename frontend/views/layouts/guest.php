@@ -3,6 +3,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
+
 use yii\helpers\Url;
 use frontend\assets\AppAsset;
 
@@ -21,7 +22,7 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
     <div class="login-cover-image">
-        <img src="http://seantheme.com/color-admin-v1.7/admin/html/assets/img/login-bg/bg-5.jpg" class="faded">
+        <?= Html::img('@web/img/bg-index.jpg', ['class'=>'faded']); ?>
     </div>
     <div class="wrapper">
         <div class="contaner" style="z-index: 100">

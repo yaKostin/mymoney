@@ -9,7 +9,7 @@ use common\modules\accounts\AccountsAsset;
 ?>
 
 <div class="card-form">
-
+    <h1> Добавить счет </h1>
     <?php $form = ActiveForm::begin(['id' => $card->formName()]); ?>
 
     <div class="row">

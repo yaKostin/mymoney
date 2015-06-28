@@ -3,8 +3,6 @@ namespace frontend\controllers;
 
 use Yii;
 
-use frontend\models\SignupForm;
-use frontend\models\ContactForm;
 use frontend\models\DashboardModel;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -112,6 +110,9 @@ class SiteController extends Controller
         $user_id = Yii::$app->user->identity->id;
         $tag_id = $_GET['id'];
         $tag = Tag::find()->where(['id' => $tag_id])->one();
+        if ( !is_object($tag) ) {
+            return $this->redirect('/');
+        }
         $tagStats = $tag->getTagStats()->one();
         $transactionsDataProvider = new ActiveDataProvider([
             'query' => Transaction::getUsersTransactionsByTag($user_id, $tag_id),
@@ -139,6 +140,9 @@ class SiteController extends Controller
         $user_id = Yii::$app->user->identity->id;
         $card_id = $_GET['id'];
         $card = Card::find()->where(['id' => $card_id])->one();
+        if ( !is_object($card) ) {
+            return $this->redirect('/');
+        }
         $transactionsDataProvider = new ActiveDataProvider([
             'query' => Transaction::find()->where(['card_id' => $card_id])->orderBy(['id' => SORT_DESC]),
             'pagination' => [
@@ -151,7 +155,9 @@ class SiteController extends Controller
                     ]
                 ]
         ]);
-
+        $chartWidth = 250;
+        $chartHeight = 250;
+        $cards = Yii::$app->user->identity->getCardArray();
         $cardsExpense = [];
         $cardsIncome = [];
         $cardsExpenseDataSets = [];
@@ -175,6 +181,8 @@ class SiteController extends Controller
 
         return $this->render('account', [
                 'transactionsDataProvider' => $transactionsDataProvider,
+                //'expenseChartConfig' => $expenseChartConfig,
+                //'incomeChartConfig' => $incomeChartConfig,
                 'card' => $card,
             ]);
     }

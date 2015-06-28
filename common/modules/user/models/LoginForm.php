@@ -32,6 +32,7 @@ class LoginForm extends Model
         return [
             // username and password are both required
             [['username', 'password'], 'required'],
+            ['password', 'string', 'min' => 6, 'max' => 32],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
@@ -68,7 +69,6 @@ class LoginForm extends Model
         } else {
             return false;
         }
-        //return true;
     }
 
     /**

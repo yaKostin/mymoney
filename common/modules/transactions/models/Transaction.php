@@ -62,6 +62,7 @@ class Transaction extends \yii\db\ActiveRecord
             'description' => 'Описание',
             'amount' => 'Сумма',
             'transactionTags' => 'Теги',
+            'tags' => 'Теги',
         ];
     }
 

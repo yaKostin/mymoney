@@ -11,7 +11,7 @@ use yii\web\JsExpression;
     <!-- /.col-lg-12 -->
 </div>
 <div class="row">
-		<div class="col-lg-4 col-md-6">
+		<div class="col-md-4">
             <div class="panel panel-yellow">
             	<a href="#">
                     <div class="panel-footer">
@@ -32,7 +32,7 @@ use yii\web\JsExpression;
             </div>
 		</div>
 		
-		<div class="col-lg-4 col-md-6">
+		<div class="col-md-4">
             <div class="panel panel-red">
             	<a href="#">
                     <div class="panel-footer">
@@ -53,7 +53,7 @@ use yii\web\JsExpression;
             </div>
 		</div>
 
-		<div class="col-lg-4 col-md-6">
+		<div class="col-md-4">
             <div class="panel panel-green">
             	<a href="#">
                     <div class="panel-footer">
@@ -84,8 +84,12 @@ use yii\web\JsExpression;
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-4">
-                            <?= ChartJs::widget($cardsExpenseChartConfig) ?>
+                        <div class="col-xs-6">
+                            <?php if (count($cardsExpenseChartConfig['data']) == 0): ?>
+                                <h1>Нет расходов</h1>
+                            <?php else: ?>
+                                <?= ChartJs::widget($cardsExpenseChartConfig) ?>
+                            <?php endif; ?>
                         </div>
                         <div class="col-xs-1">
                             <div id="chartLegend_w0"></div>
@@ -102,8 +106,12 @@ use yii\web\JsExpression;
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-4">
-                            <?= ChartJs::widget($cardsIncomeChartConfig) ?>
+                        <div class="col-xs-6">
+                            <?php if (count($cardsIncomeChartConfig['data']) == 0): ?>
+                                <h1>Нет поступлений</h1>
+                            <?php else: ?>
+                                <?= ChartJs::widget($cardsIncomeChartConfig) ?>
+                            <?php endif; ?>
                         </div>
                         <div class="col-xs-1">
                             <div id="chartLegend_w1"></div>
@@ -122,8 +130,12 @@ use yii\web\JsExpression;
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-4">
-                            <?= ChartJs::widget($expenseChartConfig) ?>
+                        <div class="col-xs-6">
+                            <?php if (count($expenseChartConfig['data']) == 0): ?>
+                                <h1>Нет расходов с тегами</h1>
+                            <?php else: ?>
+                                <?= ChartJs::widget($expenseChartConfig) ?>
+                            <?php endif; ?>
                         </div>
                         <div class="col-xs-1">
                             <div id="chartLegend_w2"></div>
@@ -140,9 +152,13 @@ use yii\web\JsExpression;
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-4">
-                            <?= ChartJs::widget($incomeChartConfig) ?>
-                        </div>
+                        <?php if (count($incomeChartConfig['data']) == 0): ?>
+                                <h1>Нет поступлений с тегами</h1>
+                            <?php else: ?>
+                                <div class="col-xs-6">
+                                    <?= ChartJs::widget($incomeChartConfig) ?>
+                                </div>
+                            <?php endif; ?>
                         <div class="col-xs-1">
                             <div id="chartLegend_w3"></div>
                         </div>
@@ -160,8 +176,12 @@ use yii\web\JsExpression;
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-4">
-                            <?= ChartJs::widget($cardsExpenseCountChartConfig) ?>
+                        <div class="col-xs-6">
+                            <?php if (count($cardsExpenseCountChartConfig['data']) == 0): ?>
+                                <h1>Нет расходов</h1>
+                            <?php else: ?>
+                                <?= ChartJs::widget($cardsExpenseCountChartConfig) ?>
+                            <?php endif; ?>
                         </div>
                         <div class="col-xs-1">
                             <div id="chartLegend_w4"></div>
@@ -178,8 +198,12 @@ use yii\web\JsExpression;
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-4">
-                            <?= ChartJs::widget($cardsIncomeCountChartConfig) ?>
+                        <div class="col-xs-6">
+                            <?php if (count($cardsIncomeCountChartConfig['data']) == 0): ?>
+                                <h1>Нет поступлений</h1>
+                            <?php else: ?>
+                                <?= ChartJs::widget($cardsIncomeCountChartConfig) ?>
+                            <?php endif; ?>
                         </div>
                         <div class="col-xs-1">
                             <div id="chartLegend_w5"></div>
