@@ -1,9 +1,14 @@
 <?php
 /* @var $this yii\web\View */
+use yii\helpers\Html;
 $this->title = 'My Yii Application';
 ?>
-<div class="site-index">
 
+<div class="login-cover-image">
+    <?= Html::img('@web/img/bg-index.jpg', ['class'=>'faded']); ?>
+</div>
+
+<div class="site-index">
     <div class="jumbotron">
         <div class="home-content">
             <h1 style="background: black">Система учета личных расходов</h1>
@@ -24,5 +29,4 @@ $this->title = 'My Yii Application';
             
         </div>
     </div>
-
 </div>

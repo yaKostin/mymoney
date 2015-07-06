@@ -25,13 +25,13 @@ return [
             'showScriptName' => false,
             'rules' => [
                 // стандартное правило для обработки '/' как 'site/index'
-                
-                
             ],
         ],
-        'language'=>'ru',
-        'sourceLanguage'=>'ru',
     ],
+    /*'bootstrap' => ['debug'],
+    'modules' => [
+        'debug' => 'yii\debug\Module',
+    ],*/
     'language'=>'ru',
     'sourceLanguage'=>'ru',
 ];

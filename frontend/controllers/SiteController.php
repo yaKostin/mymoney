@@ -10,6 +10,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
+use yii\base\Exception;
+use yii\base\UserException;
 
 use common\models\Bank;
 //use common\models\Transaction;
@@ -62,14 +64,57 @@ class SiteController extends Controller
     public function actions()
     {
         return [
-            'error' => [
+            /*'error' => [
                 'class' => 'yii\web\ErrorAction',
-            ],
+            ],*/
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    public function actionError()
+    {
+        if (($exception = Yii::$app->getErrorHandler()->exception) === null) {
+            return '';
+        }
+
+        if ($exception instanceof HttpException) {
+            $code = $exception->statusCode;
+        } else {
+            $code = $exception->getCode();
+        }
+        if ($exception instanceof Exception) {
+            $name = $exception->getName();
+        } else {
+            $name = $this->defaultName ?: Yii::t('yii', 'Error');
+        }
+        if ($code) {
+            $name .= " (#$code)";
+        }
+
+        if ($exception instanceof UserException) {
+            $message = $exception->getMessage();
+        } else {
+            $message = $this->defaultMessage ?: Yii::t('yii', 'An internal server error occurred.');
+        }
+
+        if (Yii::$app->getRequest()->getIsAjax()) {
+            return "$name: $message";
+        } else {
+            if (Yii::$app->user->isGuest) {
+                $this->layout = 'guest';
+                $view = 'error-guest.php';
+            }
+            else {
+                $view = 'error.php';
+            }
+            return $this->render( $view, [
+                'name' => $name,
+                'message' => $message,                
+            ]);
+        }
     }
 
     public function actionLogin() 

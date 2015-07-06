@@ -21,14 +21,20 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-    <div class="login-cover-image">
-        <?= Html::img('@web/img/bg-index.jpg', ['class'=>'faded']); ?>
-    </div>
+    
     <div class="wrapper">
         <div class="contaner" style="z-index: 100">
             <?= $content ?>
         </div>
     </div>
+
+    <footer class="footer" style="position: absolute; bottom: 0; width: 100%">
+        <div class="container">
+        <p class="pull-left">&copy; Костин Ярослав <?= date('Y') ?></p>
+        <p class="pull-right"><?= Yii::powered() ?></p>
+        </div>
+    </footer>
+
 <?php $this->endBody() ?>
 </body>
 </html>
