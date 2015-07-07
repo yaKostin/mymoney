@@ -19,6 +19,7 @@ class DefaultController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
+                    'delete-multiple' => ['post'],
                 ],
             ],
         ];
@@ -64,6 +65,17 @@ class DefaultController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['/site/dashboard']);        
+    }
+
+    public function actionDeleteMultiple()
+    {
+        $id = Yii::$app->request->post('id'); // Array or selected records id's
+        // Preventing extra unnecessary query
+        if (!$id) {
+            return;
+        }
+
+        return Transaction::deleteAll(['id' => $id]);
     }
 
     /**

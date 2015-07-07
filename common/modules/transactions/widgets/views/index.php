@@ -2,9 +2,10 @@
 
 use yii\helpers\Html;
 //use yii\grid\GridView;
-use kartik\grid\GridView;
 use prawee\widgets\ButtonAjax;
+use kartik\grid\GridView;
 use yii\bootstrap\Modal;
+use yii\bootstrap\Button;
 use yii\widgets\Pjax;
 use yii\grid\ActionColumn;
 /* @var $this yii\web\View */
@@ -30,20 +31,19 @@ $this->title = 'Транзакции';
     <?php echo
 	GridView::widget([
 	    'dataProvider' => $transactionsDataProvider,
-	    //'filterModel' => $model->$searchModel,
-	    //'columns' => $model->gridColumns,
+	    //'filterModel' => $model->$searchModel,	    
 	    'export' => false,
-       
+        'id' => 'transactions-gridview',
         'toolbar' =>  [
-            ['content'=>
+            ['content' =>
                 Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['transactions'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>'Reset Grid'])
             ],
             '{toggleData}',
             '{export}',
         ],
         'pjax' => true,
-        'pjaxSettings'=>[
-            'neverTimeout'=>true,
+        'pjaxSettings' => [
+            'neverTimeout' => true,
         ],    
         'hover' => true,
         'columns' => [
@@ -72,11 +72,10 @@ $this->title = 'Транзакции';
                 'label' => 'Дата',
                 'value' => function($model, $index, $widget) {
                     $date = new DateTime($model->trdate);
-                    return  $date->format("d-M");// $tagsStr;                    
+                    return  $date->format("d-M");
                 },
             ],
             'card.name:raw:Карта',
-            //'transactiontype.name:raw:Тип',
             [
                 'attribute' => 'transactionTags',
                 'label' => 'Теги',
@@ -94,26 +93,54 @@ $this->title = 'Транзакции';
                 'class' => ActionColumn::className(),
                 'controller' => 'transactions/default'
             ],
-            //''
         ],
-        //'resizableColumns' => true,
         'panel' => [
             'type' => GridView::TYPE_DEFAULT,
             'heading' => $this->title,
-            'before' => ButtonAjax::widget([
-				            'name'=>'Создать',
-				            'route'=>['/transactions/default/create'],
-				            'modalId'=>'#main-modal',
-				            'modalContent'=>'#main-content-modal',
-				            'options'=>[
-				                'class'=>'btn btn-success',
-				                'title'=>'Добавить новую транзакцию',
+            'before' => 
+                    ButtonAjax::widget([
+				            'name' => 'Создать',
+				            'route' => ['/transactions/default/create'],
+				            'modalId' => '#main-modal',
+				            'modalContent' => '#main-content-modal',
+				            'options' => [
+				                'class' => 'btn btn-success',
+				                'title' => 'Добавить новую транзакцию',
+                                'style' => 'margin-right: 10px'
 				            ]
-        				]),
+                    ]) 
+                    .
+                    Button::widget([
+                        'id' => 'delete-multiple-btn',
+                        'label' => 'Удалить',
+                        'options' => [
+                            'class' => 'btn-danger',
+                            'data-url' => '/transactions/default/delete-multiple',
+                            ]
+                    ])
         ],
-		]);
+	]);
 ?>
 
     <?php Pjax::end(); ?>
 
 </div>
+
+<?php 
+$js = <<< JS
+$(document).on('click', '#delete-multiple-btn', function() {    
+    $.post(
+        "/transactions/default/delete-multiple", 
+        {
+            id : $('#transactions-gridview').yiiGridView('getSelectedRows')
+        },
+        function() {
+            $.pjax.reload({
+                container : '#transactions-gridview-pjax'
+            });
+        }
+    );
+});
+JS;
+$this->registerJs($js);
+?>
